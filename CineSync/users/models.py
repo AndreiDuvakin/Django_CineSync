@@ -1,9 +1,11 @@
 import time
 
 from django.conf import settings
-from django.db.models import Model, OneToOneField, CASCADE, DateField, CharField, ImageField
+from django.db.models import Model, OneToOneField, CASCADE, DateField, CharField, ImageField, ManyToManyField
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
+
+from films.models import Genre
 
 
 class Profile(Model):
@@ -32,6 +34,11 @@ class Profile(Model):
         blank=True,
         verbose_name='Аватар пользователя',
         upload_to=get_upload_path,
+    )
+    genres = ManyToManyField(
+        Genre,
+        related_name='profiles',
+        related_query_name='profiles',
     )
 
     def get_image_x300(self):
