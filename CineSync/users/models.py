@@ -13,24 +13,24 @@ class Profile(Model):
 
     user = OneToOneField(
         settings.AUTH_USER_MODEL,
-        verbose_name='пользователь',
+        verbose_name='Пользователь',
         related_name='profile',
         related_query_name='profile',
         on_delete=CASCADE,
     )
     birthday = DateField(
-        verbose_name='дата рождения пользователя',
+        verbose_name='Дата рождения пользователя',
         null=True,
         blank=True,
     )
     role = CharField(
-        verbose_name='роль пользователя',
+        verbose_name='Роль пользователя',
         max_length=20,
     )
     image = ImageField(
         null=True,
         blank=True,
-        verbose_name="аватар пользователя",
+        verbose_name='Аватар пользователя',
         upload_to=get_upload_path,
     )
 
@@ -56,6 +56,6 @@ class Profile(Model):
     list_display = ['image_tmb']
 
     class Meta:
-        verbose_name = 'данные пользователя'
-        verbose_name_plural = 'данные пользователей'
-        db_table = "users_profiles"
+        verbose_name = 'Данные пользователя'
+        verbose_name_plural = 'Данные пользователей'
+        db_table = 'users_profiles'
