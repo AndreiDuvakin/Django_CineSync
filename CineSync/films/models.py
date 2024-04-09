@@ -1,9 +1,9 @@
-from django.db import models
+from django.db.models import Model, CharField, IntegerField, DateField, ManyToManyField
 from django.core.validators import MinValueValidator
 
 
-class Genre(models.Model):
-    name = models.CharField(
+class Genre(Model):
+    name = CharField(
         'Название',
         help_text='Название жанра',
         max_length=100,
@@ -16,30 +16,31 @@ class Genre(models.Model):
         verbose_name_plural = 'Жанры'
 
 
-class Film(models.Model):
-    name = models.CharField(
+class Film(Model):
+    name = CharField(
         'Название',
         help_text='Название фильма',
         max_length=100,
         null=False,
     )
 
-    duration = models.IntegerField(
+    duration = IntegerField(
         'Продолжительность',
         help_text='Продолжительность фильма (в минутах)',
         validators=[MinValueValidator(0)],
         null=False,
     )
 
-    release_date = models.DateField(
+    release_date = DateField(
         'Дата релиза',
         help_text='Дата выхода фильма',
     )
 
-    genres = models.ManyToManyField(
+    genres = ManyToManyField(
         Genre,
         verbose_name='Жанры',
         related_name='films',
+        related_query_name='films',
         help_text='Жанры фильма',
     )
 

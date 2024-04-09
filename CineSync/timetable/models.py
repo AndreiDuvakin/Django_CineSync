@@ -1,7 +1,8 @@
-from django.db.models import Model, CharField, IntegerField, OneToOneField, CASCADE, DateTimeField, FloatField
+from django.db.models import Model, CharField, IntegerField, OneToOneField, CASCADE, DateTimeField, FloatField, \
+    ForeignKey
 from django.core.validators import MinValueValidator
 
-from films.models import Films
+from films.models import Film
 
 
 class Auditorium(Model):
@@ -41,8 +42,9 @@ class Row(Model):
     auditorium = OneToOneField(
         Auditorium,
         on_delete=CASCADE,
-        verbose_name='зал',
+        verbose_name='Зал',
         related_name='rows',
+        related_query_name='rows',
     )
 
     class Meta:
@@ -63,22 +65,23 @@ class FilmSession(Model):
         ],
     )
 
-    film = OneToOneField(
-        Films,
+    film = ForeignKey(
+        Film,
         on_delete=CASCADE,
-        verbose_name='фильм',
+        verbose_name='Фильм',
         related_name='sessions',
+        related_query_name='sessions',
     )
 
-    auditorium = OneToOneField(
+    auditorium = ForeignKey(
         Auditorium,
         on_delete=CASCADE,
-        verbose_name='зал',
+        verbose_name='Зал',
         related_name='sessions',
+        related_query_name='sessions',
     )
 
     class Meta:
         db_table = 'timetable_film_sessions'
         verbose_name = 'Сеанс'
         verbose_name_plural = 'Сеансы'
-
