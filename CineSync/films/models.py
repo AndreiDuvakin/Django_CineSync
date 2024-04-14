@@ -1,5 +1,20 @@
-from django.db.models import Model, CharField, IntegerField, DateField, ManyToManyField
+from django.db.models import (
+    Model,
+    CharField,
+    IntegerField,
+    DateField,
+    ManyToManyField,
+    Manager,
+)
+from django.utils import timezone
 from django.core.validators import MinValueValidator
+
+
+class FilmManager(Manager):
+    def released(self):
+        return super().get_queryset().filter(
+            release_date__lt=timezone.now(),
+        )
 
 
 class Genre(Model):
@@ -17,6 +32,8 @@ class Genre(Model):
 
 
 class Film(Model):
+    objects = FilmManager()
+
     name = CharField(
         'Название',
         help_text='Название фильма',

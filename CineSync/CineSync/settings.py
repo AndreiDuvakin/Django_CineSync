@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
 
-DEBUG = os.environ.get("DJANGO_DEBUG", default="false")
+DEBUG = os.getenv("DJANGO_DEBUG", default="false")
 DEBUG = DEBUG.lower().strip() in ("true", "yes", "1", "y", "t")
 
 AUTH_USER_MODEL = "auth.User"
