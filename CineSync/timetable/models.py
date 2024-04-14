@@ -39,7 +39,7 @@ class Row(Model):
         ],
     )
 
-    auditorium = OneToOneField(
+    auditorium = ForeignKey(
         Auditorium,
         on_delete=CASCADE,
         verbose_name='Зал',

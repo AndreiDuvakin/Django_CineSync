@@ -36,6 +36,12 @@ class Film(Model):
         help_text='Дата выхода фильма',
     )
 
+    description = CharField(
+        help_text='Описание фильма',
+        max_length=1000,
+        null=False,
+    )
+
     genres = ManyToManyField(
         Genre,
         verbose_name='Жанры',
