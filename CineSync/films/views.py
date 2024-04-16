@@ -6,11 +6,10 @@ from films.models import Film
 
 def films_list(request: HttpResponse) -> HttpResponse:
     films = Film.objects.released()
-    context = {'films': films}
     return render(
         request,
         'films/films_list.html',
-        context,
+        {'films': films},
     )
 
 
@@ -21,7 +20,7 @@ def film_details(request: HttpResponse, film_id: int) -> HttpResponse:
     )
     return render(
         request,
-        "catalog/film_details.html",
-        {"item": item},
+        'films/film_details.html',
+        {'item': item},
     )
 

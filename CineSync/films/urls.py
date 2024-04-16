@@ -1,9 +1,9 @@
 from django.urls import path
 
-from films import views
+from films.views import films_list, film_details
 
 app_name = 'films'
 urlpatterns = [
-    path('', views.films_list, name='main'),
-    path('<int:film_id>/', views.film_details, name='film_details')
+    path('', films_list, name='main'),
+    path('<int:film_id>/', film_details, name='film_details')
 ]

@@ -7,6 +7,9 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('films/', include('films.urls'), name='films'),
+    path("auth/", include("users.urls"), name="auth"),
+    path("auth/", include("django.contrib.auth.urls"), name="auth"),
+
 ]
 
 if settings.DEBUG:
