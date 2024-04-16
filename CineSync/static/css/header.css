@@ -11,21 +11,17 @@
 }
 header {
     justify-content: space-between;
-    background-color: #eaeaea;
+    background-color: #ffffff;
+    position: fixed;
     margin: 1%;
     width: 98%;
     border-radius: 0.8vw;;
 }
 .header_container {
     width: 100%;
-    position: fixed;
+    z-index: 103;
 }
 .nav-item {
     margin: 5px;
 }
-.header_hole {
-    height: 5vw;
-}
-.auth_row {
-    margin-right: 1vw;
-}
+

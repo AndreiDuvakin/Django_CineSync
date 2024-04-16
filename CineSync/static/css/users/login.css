@@ -1,0 +1,16 @@
+.login_block, form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.login_block {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10vw;
+    border-radius: 3vw;
+    background-color: #eaeaea;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    width: 40%;
+}

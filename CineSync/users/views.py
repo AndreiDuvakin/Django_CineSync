@@ -9,15 +9,15 @@ from django.views.generic import View
 from users.forms import SignUpForm, ProfileForm, UserForm
 from users.models import Profile
 
-
 __all__ = []
 
 
 def signup(request):
     form = SignUpForm(request.POST)
-    template = "users/signup.html"
+    template = 'users/signup.html'
     context = {
-        "form": form,
+        'form': form,
+        'text_button': 'Зарегистрироваться',
     }
     if request.method == 'GET':
         return render(request, template, context)
@@ -27,8 +27,8 @@ def signup(request):
         user.save()
         Profile.objects.create(user=user)
         user.profile.save()
-        messages.success(request, _("Пользователь упешно создан"))
-        return redirect(reverse("users:login"))
+        messages.success(request, _('Пользователь упешно создан'))
+        return redirect(reverse('users:login'))
 
     return render(request, template, context)
 
@@ -45,11 +45,12 @@ def profile(request):
     if request.method == 'GET':
         return render(
             request,
-            "users/profile.html",
+            'users/profile.html',
             {
-                "profile_form": profile_form,
-                "user_form": user_form,
-                "user": request.user,
+                'profile_form': profile_form,
+                'user_form': user_form,
+                'user': request.user,
+                'text_button': 'Войти',
             },
         )
 
@@ -59,37 +60,10 @@ def profile(request):
 
     return render(
         request,
-        "users/profile.html",
+        'users/profile.html',
         {
-            "profile_form": profile_form,
-            "user_form": user_form,
-            "user": request.user,
+            'profile_form': profile_form,
+            'user_form': user_form,
+            'user': request.user,
         },
     )
-
-
-class SignupView(View):
-    def get(self, request):
-        form = SignUpForm()
-        template = "users/signup.html"
-        context = {
-            "form": form,
-        }
-        return render(request, template, context)
-
-    def post(self, request):
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = settings.DEFAULT_USER_IS_ACTIVE
-            user.save()
-            Profile.objects.create(user=user)
-            user.profile.save()
-            messages.success(request, _("Пользователь упешно создан"))
-            return redirect(reverse("users:login"))
-
-        template = "users/signup.html"
-        context = {
-            "form": form,
-        }
-        return render(request, template, context)
