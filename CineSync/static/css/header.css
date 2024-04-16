@@ -1,0 +1,26 @@
+.header_icon {
+    width: 5vw;
+    border-radius: 1.5vw;
+    padding:1vw;
+}
+.header_row, .auth_row, header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+header {
+    justify-content: space-between;
+    background-color: #ffffff;
+    position: fixed;
+    margin: 1%;
+    width: 98%;
+    border-radius: 0.8vw;;
+}
+.header_container {
+    width: 100%;
+}
+.nav-item {
+    margin: 5px;
+}
+

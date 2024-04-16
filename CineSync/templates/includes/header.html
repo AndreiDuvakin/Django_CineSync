@@ -1,0 +1,38 @@
+{% load static %}
+<div class="header_container">
+    <header>
+        <div class="header_row">
+            <img src="{% static 'img/logo.jpg' %}" class="header_icon col-4">
+            <ul class="nav nav-pills">
+                {% with request.resolver_match.view_name as view_name %}
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name == 'home:homepage' %} active {% endif %}"
+                       href="{% url 'home:homepage' %}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name == 'home:homepage' %} active {% endif %}"
+                       href="{% url 'home:homepage' %}">Фильмы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name == 'home:homepage' %} active {% endif %}"
+                       href="{% url 'home:homepage' %}">Расписание</a>
+                </li>
+                {% endwith %}
+            </ul>
+        </div>
+        <div class="auth_row">
+            {% if user.is_authenticated %}
+
+            {% else %}
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="{% url 'home:homepage' %}">Регистрация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary" href="{% url 'home:homepage' %}">Вход</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </header>
+</div>
