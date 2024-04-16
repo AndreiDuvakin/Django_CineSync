@@ -1,0 +1,23 @@
+.profile_block, form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.profile_block {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 4vw;
+    margin-bottom: 4vw;
+    border-radius: 3vw;
+    background-color: #eaeaea;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    width: 40%;
+}
+.form_item {
+    width: 30vw !important;
+}
+.btn {
+    margin: 5px !important;
+}
