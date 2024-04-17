@@ -20,6 +20,7 @@ header {
 .header_container {
     width: 100%;
     position: fixed;
+    z-index: 100;
 }
 .nav-item {
     margin: 5px;

@@ -6,8 +6,8 @@
 {% block content %}
 <link href="{% static 'css/home/homepage.css' %}" rel="stylesheet">
 <div class="carousel_films">
+    <h1 class="header_title">Сейчас в прокате</h1>
     <div id="carouselWhite" class="carousel carousel slide">
-        {{films}}
         <div class="carousel-indicators">
             {% for film in films_preview %}
             <button type="button" data-bs-target="#carouselWhite" data-bs-slide-to="{{ forloop.counter0 }}"
@@ -17,8 +17,9 @@
         </div>
         <div class="carousel-inner">
             {% for film in films_preview %}
-            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" data-bs-interval="10000">
-                <img src="{{ film.image.url }}" class="d-block w-100 film_card_image" alt="Фотография фильма не найдена">
+            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" data-bs-interval="10">
+                <img src="{{ film.image.url }}" class="d-block w-100 film_preview_image"
+                     alt="Фотография фильма не найдена">
                 <div class="carousel-caption d-none d-md-block caption_block">
                     <h5>{{ film.name }}</h5>
                     <p>{{ film.description|truncatewords_html:10|safe }}</p>
@@ -36,4 +37,58 @@
         </button>
     </div>
 </div>
+<div class="timetable_block">
+    <h1 class="header_title">Расписание</h1>
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            {% for date in films_sessions %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link tab_btn {% if forloop.counter0 == 0 %} active {% endif %}"
+                        id="tab-{{ date }}"
+                        data-bs-toggle="tab" data-bs-target="#content-{{ date|date:'Y-m-d' }}"
+                        type="button" role="tab" aria-controls="content-{{ date|date:'Y-m-d' }}"
+                        aria-selected="true">
+                    {% if date|date == now|date %}
+                    Сегодня
+                    {% elif date|date == tomorrow|date %}
+                    Завтра
+                    {% else %}
+                    {{ date|date:"j M" }}
+                    {% endif %}
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            {% for date, sessions in films_sessions.items %}
+            <div class="tab-pane fade timetable_body {% if forloop.counter0 == 0 %} show active {% endif %}"
+                 id="content-{{ date|date:'Y-m-d' }}" role="tabpanel"
+                 aria-labelledby="tab-{{ date }}"
+                 aria-selected="{% if forloop.counter0 == 0 %} true {% else %} false {% endif %}">
+                {% for film, session in sessions.items %}
+                <div class="film_card">
+                    {% if film.image %}
+                    <img src="{{ film.image.url }}" class="d-block w-100 film_card_image film_card_item"
+                         alt="Фотография фильма не найдена">
+                    {% else %}
+                    Картинки нет :(
+                    {% endif %}
+                    <div class="film_card_column">
+                        <label class="film_card_column_item">{{film.name}}</label>
+                        <div class="film_card_row">
+                            {% for time_sessions in session %}
+                            <div class="film_session">
+                                <a class="session_time">{{ time_sessions.start_datetime|time:"H:i" }}</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -1,6 +1,5 @@
 import time
 from datetime import timedelta
-from random import shuffle
 
 from django.db.models import (
     Model,
@@ -12,6 +11,7 @@ from django.db.models import (
 )
 from django.utils import timezone
 from django.core.validators import MinValueValidator
+from sorl.thumbnail import get_thumbnail
 
 
 class FilmManager(Manager):
@@ -23,11 +23,19 @@ class FilmManager(Manager):
     def on_main(self):
         current_datetime = timezone.now()
         end_datetime = current_datetime + timedelta(days=5)
-        films_with_sessions = Film.objects.filter(
+        films_with_sessions = super().get_queryset().filter(
             sessions__start_datetime__gte=current_datetime,
             sessions__start_datetime__lte=end_datetime,
-        ).exclude(image=None).distinct()
-        shuffle(list(films_with_sessions))
+        ).exclude(image=None).distinct().only(
+            Film.name.field.name,
+            Film.image.field.name,
+            Film.description.field.name,
+        )
+
+        if films_with_sessions.count() > 5:
+            films_with_sessions = films_with_sessions[:5]
+        elif films_with_sessions.count() > 0:
+            films_with_sessions = films_with_sessions[:films_with_sessions.count()]
         return films_with_sessions
 
 
@@ -48,6 +56,9 @@ class Genre(Model):
 class Film(Model):
     def get_upload_path(self, filename):
         return f'users/films/{self.pk}/{time.time()}_{filename}'
+
+    def get_image_url(self):
+        return self.image.url
 
     objects = FilmManager()
 

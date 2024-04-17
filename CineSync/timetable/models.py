@@ -1,9 +1,25 @@
 from datetime import timedelta
 
-from django.db.models import Model, CharField, IntegerField, CASCADE, DateTimeField, FloatField, ForeignKey
+from django.db.models import Model, CharField, IntegerField, CASCADE, DateTimeField, FloatField, ForeignKey, Manager
 from django.core.validators import MinValueValidator
+from django.utils import timezone
 
 from films.models import Film
+
+
+class FilmSessionsManager(Manager):
+    def nearest_timetable(self):
+        current_datetime = timezone.now()
+        end_datetime = current_datetime + timedelta(days=5)
+        films_sessions = super().get_queryset().filter(
+            start_datetime__gte=current_datetime,
+            start_datetime__lte=end_datetime,
+        ).prefetch_related(
+            FilmSession.film.field.name,
+        ).order_by(
+            FilmSession.start_datetime.field.name,
+        )
+        return films_sessions
 
 
 class Auditorium(Model):
@@ -55,6 +71,8 @@ class Row(Model):
 
 
 class FilmSession(Model):
+    objects = FilmSessionsManager()
+
     start_datetime = DateTimeField(
         verbose_name='Дата и время начала сеанса',
     )
@@ -64,7 +82,6 @@ class FilmSession(Model):
         blank=True,
         null=True,
     )
-
 
     price = FloatField(
         verbose_name='Цена билета',
