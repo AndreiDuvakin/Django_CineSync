@@ -8,6 +8,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     UserCreationForm,
 )
+from django.forms import DateInput
 
 from users.models import Profile
 
@@ -76,6 +77,9 @@ class ProfileForm(forms.ModelForm):
             model.birthday.field.name,
             model.image.field.name,
         ]
+        widgets = {
+            model.birthday.field.name: DateInput(attrs={'type': 'date'})
+        }
 
 
 class CustomUserChangeForm(UserChangeForm):

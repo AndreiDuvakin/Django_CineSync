@@ -42,21 +42,12 @@ def profile(request):
         request.POST or None,
         instance=request.user,
     )
-    if request.method == 'GET':
-        return render(
-            request,
-            'users/profile.html',
-            {
-                'profile_form': profile_form,
-                'user_form': user_form,
-                'user': request.user,
-                'text_button': 'Войти',
-            },
-        )
 
-    if all((profile_form.is_valid(), user_form.is_valid())):
-        profile_form.save()
-        user_form.save()
+    if request.method == 'POST':
+        if all((profile_form.is_valid(), user_form.is_valid())):
+            profile_form.save()
+            user_form.save()
+            return redirect(reverse('users:profile'))
 
     return render(
         request,

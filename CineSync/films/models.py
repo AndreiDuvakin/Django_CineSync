@@ -1,10 +1,12 @@
+import time
+
 from django.db.models import (
     Model,
     CharField,
     IntegerField,
     DateField,
     ManyToManyField,
-    Manager,
+    Manager, ImageField,
 )
 from django.utils import timezone
 from django.core.validators import MinValueValidator
@@ -32,6 +34,9 @@ class Genre(Model):
 
 
 class Film(Model):
+    def get_upload_path(self, filename):
+        return f'users/avatars/{self.pk}/{time.time()}_{filename}'
+
     objects = FilmManager()
 
     name = CharField(
@@ -57,6 +62,13 @@ class Film(Model):
         help_text='Описание фильма',
         max_length=1000,
         null=False,
+    )
+
+    image = ImageField(
+        null=True,
+        blank=True,
+        verbose_name='Аватар пользователя',
+        upload_to=get_upload_path,
     )
 
     genres = ManyToManyField(

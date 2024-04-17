@@ -24,8 +24,8 @@
             {% if user.is_authenticated %}
             <a class="user_link" href="{% url 'users:profile' %}">{{ user }}</a>
             <a class="user_link" href="{% url 'users:profile' %}">
-                {% if user.image %}
-                {{ user.image_tmb }}
+                {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" class="header_icon col-4">
                 {% else %}
                 <img src="{% static 'img/user.png' %}" class="header_icon col-4">
                 {% endif %}

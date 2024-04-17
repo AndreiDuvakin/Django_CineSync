@@ -19,6 +19,9 @@ urlpatterns = [
         views.LoginView.as_view(
             template_name='users/login.html',
             authentication_form=CustomAuthenticationForm,
+            extra_context={
+                'text_button': 'Войти',
+            },
         ),
         name='login',
     ),
