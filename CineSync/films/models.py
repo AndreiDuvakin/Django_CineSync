@@ -1,4 +1,6 @@
 import time
+from datetime import timedelta
+from random import shuffle
 
 from django.db.models import (
     Model,
@@ -18,6 +20,16 @@ class FilmManager(Manager):
             release_date__lt=timezone.now(),
         )
 
+    def on_main(self):
+        current_datetime = timezone.now()
+        end_datetime = current_datetime + timedelta(days=5)
+        films_with_sessions = Film.objects.filter(
+            sessions__start_datetime__gte=current_datetime,
+            sessions__start_datetime__lte=end_datetime,
+        ).exclude(image=None).distinct()
+        shuffle(list(films_with_sessions))
+        return films_with_sessions
+
 
 class Genre(Model):
     name = CharField(
@@ -35,7 +47,7 @@ class Genre(Model):
 
 class Film(Model):
     def get_upload_path(self, filename):
-        return f'users/avatars/{self.pk}/{time.time()}_{filename}'
+        return f'users/films/{self.pk}/{time.time()}_{filename}'
 
     objects = FilmManager()
 
@@ -67,7 +79,7 @@ class Film(Model):
     image = ImageField(
         null=True,
         blank=True,
-        verbose_name='Аватар пользователя',
+        verbose_name='Изображение фильма',
         upload_to=get_upload_path,
     )
 

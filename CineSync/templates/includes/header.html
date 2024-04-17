@@ -30,6 +30,9 @@
                 <img src="{% static 'img/user.png' %}" class="header_icon col-4">
                 {% endif %}
             </a>
+            {% if user.is_staff %}
+            <a class="btn btn-primary" href="/admin">Админка</a>
+            {% endif %}
             {% else %}
             <ul class="nav nav-pills">
                 <li class="nav-item">

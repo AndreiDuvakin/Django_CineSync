@@ -1,5 +1,6 @@
-from django.db.models import Model, CharField, IntegerField, OneToOneField, CASCADE, DateTimeField, FloatField, \
-    ForeignKey
+from datetime import timedelta
+
+from django.db.models import Model, CharField, IntegerField, CASCADE, DateTimeField, FloatField, ForeignKey
 from django.core.validators import MinValueValidator
 
 from films.models import Film
@@ -58,6 +59,13 @@ class FilmSession(Model):
         verbose_name='Дата и время начала сеанса',
     )
 
+    end_datetime = DateTimeField(
+        verbose_name='Дата и время начала сеанса',
+        blank=True,
+        null=True,
+    )
+
+
     price = FloatField(
         verbose_name='Цена билета',
         validators=[
@@ -72,7 +80,6 @@ class FilmSession(Model):
         related_name='sessions',
         related_query_name='sessions',
     )
-
     auditorium = ForeignKey(
         Auditorium,
         on_delete=CASCADE,
@@ -80,6 +87,11 @@ class FilmSession(Model):
         related_name='sessions',
         related_query_name='sessions',
     )
+
+    def save(self, *args, **kwargs):
+        if self.start_datetime and self.film.duration:
+            self.end_datetime = self.start_datetime + timedelta(minutes=self.film.duration)
+        super().save(*args, **kwargs)
 
     class Meta:
         db_table = 'timetable_film_sessions'

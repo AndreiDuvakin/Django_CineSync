@@ -1,24 +1,22 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
 
-from users.models import Profile
-
-user = get_user_model()
-admin.site.unregister(user)
+from films.models import Film, Genre
 
 
-class ProfileInline(admin.TabularInline):
-    can_delete = False
-    model = Profile
-    fields = [
-        Profile.birthday.field.name,
-        Profile.image.field.name,
+@admin.register(Film)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = [
+        Film.name.field.name,
+        Film.duration.field.name,
+    ]
+
+    filter_horizontal = [
+        Film.genres.field.name,
     ]
 
 
-@admin.register(user)
-class UserAdmin(UserAdmin):
-    inlines = [
-        ProfileInline,
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    list_display = [
+        Genre.name.field.name,
     ]

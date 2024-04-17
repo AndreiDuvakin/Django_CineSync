@@ -4,5 +4,36 @@
 Главная
 {% endblock title %}
 {% block content %}
-
+<link href="{% static 'css/home/homepage.css' %}" rel="stylesheet">
+<div class="carousel_films">
+    <div id="carouselWhite" class="carousel carousel slide">
+        {{films}}
+        <div class="carousel-indicators">
+            {% for film in films_preview %}
+            <button type="button" data-bs-target="#carouselWhite" data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="active"
+                    aria-current="true" aria-label="{{film.name|truncatewords_html:5}}"></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for film in films_preview %}
+            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" data-bs-interval="10000">
+                <img src="{{ film.image.url }}" class="d-block w-100 film_card_image" alt="Фотография фильма не найдена">
+                <div class="carousel-caption d-none d-md-block caption_block">
+                    <h5>{{ film.name }}</h5>
+                    <p>{{ film.description|truncatewords_html:10|safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselWhite" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselWhite" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
 {% endblock %}
