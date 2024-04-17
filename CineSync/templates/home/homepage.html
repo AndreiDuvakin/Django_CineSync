@@ -11,7 +11,7 @@
         <div class="carousel-indicators">
             {% for film in films_preview %}
             <button type="button" data-bs-target="#carouselWhite" data-bs-slide-to="{{ forloop.counter0 }}"
-                    class="active"
+                    class="{% if forloop.counter0 == 0 %} active {% endif %}"
                     aria-current="true" aria-label="{{film.name|truncatewords_html:5}}"></button>
             {% endfor %}
         </div>
