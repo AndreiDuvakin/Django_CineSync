@@ -19,11 +19,12 @@
     height: 40%;
     background-color: rgba(13, 29, 58, 0.8);
     padding: 1vw;
-    border-bottom-left-radius: 3vw;
-    border-bottom-right-radius: 3vw;
+    margin: 0.5vw;
     color: #eaeaea; 
     opacity: 0;
     transition: opacity 0.5s ease;
+    border-radius: 3vw;
+    overflow-y: auto; 
 }
 
 .film_preview_card_text_block h3 {
@@ -32,7 +33,9 @@
     font-size: 1.5vw;
     font-weight: bold;
 }
-
+.film_preview_card_text_block::-webkit-scrollbar {
+    display: none;
+}
 .film_preview_card_text_block p {
     margin-top: 0;
     margin-bottom: 0;
