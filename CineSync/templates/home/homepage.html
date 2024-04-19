@@ -77,7 +77,7 @@
                         </div>
                         <div class="film_card_row">
                             {% for time_sessions in session %}
-                            <a class="film_session" href={% url 'tickets:tickets' sess_id=time_sessions.id %}>
+                            <a class="film_session" href={% url 'time_table:session' sess_id=time_sessions.id %}>
                                 <div class="session_time">{{ time_sessions.start_datetime|time:"H:i" }}</div>
                             </a>
                             {% endfor %}

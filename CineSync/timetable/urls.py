@@ -6,5 +6,5 @@ app_name = 'time_table'
 
 urlpatterns = [
     path('', timetable_view, name='main'),
-    path('session/<int:pk>', session_view, name='main'),
+    path('session/<int:sess_id>', session_view, name='session'),
 ]

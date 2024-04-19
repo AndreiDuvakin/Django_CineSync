@@ -4,6 +4,21 @@
     width: 70% !important;
     border-radius: 3vw;
 }
+.film_session_image {
+    margin-top: 40px;
+    object-fit: cover;
+    height: 20vw !important;
+    width: 50% !important;
+    border-radius: 3vw;
+}
+.line {
+    width: 30%;
+    height: 5px;
+    background-color: black;
+    position: absolute;
+    top: 70%;
+    border-radius: 3vw;
+}
 .ticket_film_image {
     object-fit: cover;
     height: 20vw !important;
@@ -43,7 +58,7 @@
     padding-bottom: 2vw;
     flex-direction: column;
 }
-.film_card {
+.film_card, .seats_card {
     width: 100%;
     background-color: #eaeaea;
     margin-top: 1vw;
