@@ -1,5 +1,4 @@
 .carousel_films {
-    margin-top: 5vw;
     height: 30vw;
     width: 100%;
 }
@@ -128,4 +127,7 @@
 }
 .genre {
     margin-right: 0.5vw;
+}
+.carousel_title {
+    margin-top: 5vw;
 }

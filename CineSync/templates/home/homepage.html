@@ -5,6 +5,7 @@
 {% endblock title %}
 {% block content %}
 <link href="{% static 'css/home/homepage.css' %}" rel="stylesheet">
+<h1 class="header_title carousel_title">Сейчас в прокате</h1>
 <div id="carouselWhite" class="carousel carousel slide carousel_films" data-bs-ride="carousel">
     <div class="carousel-indicators">
         {% for film in films_preview %}
