@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def timetable_view(request):
+    pass
+
+
+def session_view(request):
+    pass

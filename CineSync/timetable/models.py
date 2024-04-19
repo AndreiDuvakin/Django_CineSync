@@ -35,6 +35,9 @@ class Auditorium(Model):
         ],
     )
 
+    def __str__(self):
+        return self.number
+
     class Meta:
         db_table = 'timetable_auditoriums'
         verbose_name = 'Зал'

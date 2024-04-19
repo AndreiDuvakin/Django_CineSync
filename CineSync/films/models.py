@@ -1,6 +1,7 @@
 import time
 from datetime import timedelta
 
+import sorl
 from django.db.models import (
     Model,
     CharField,
@@ -11,6 +12,7 @@ from django.db.models import (
 )
 from django.utils import timezone
 from django.core.validators import MinValueValidator
+from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
 
@@ -47,6 +49,9 @@ class Genre(Model):
         null=False,
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'films_genres'
         verbose_name = 'Жанр'
@@ -54,11 +59,11 @@ class Genre(Model):
 
 
 class Film(Model):
+    def __str__(self):
+        return self.name
+
     def get_upload_path(self, filename):
         return f'users/films/{self.pk}/{time.time()}_{filename}'
-
-    def get_image_url(self):
-        return self.image.url
 
     objects = FilmManager()
 
@@ -101,6 +106,25 @@ class Film(Model):
         related_query_name='films',
         help_text='Жанры фильма',
     )
+
+    def get_image_300x300(self):
+        return sorl.thumbnail.get_thumbnail(
+            self.image,
+            "300x300",
+            crop="center",
+            quality=51,
+        )
+
+    def image_tmb(self):
+        if self.image:
+            tag = f"{self.get_image_300x300().url}"
+            return mark_safe(tag)
+
+        return "Нет изорбражения"
+
+    image_tmb.field_name = "image_tmb"
+    image_tmb.allow_tags = True
+    image_tmb.short_description = "Превью"
 
     class Meta:
         db_table = 'films_films'

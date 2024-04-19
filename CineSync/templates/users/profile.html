@@ -4,7 +4,7 @@
 {% block content %}
 <link href="{% static 'css/users/profile.css' %}" rel="stylesheet">
 <div class="profile_block">
-    <h1>{{ user.username }}</h1>
+    <h1>Профиль</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% if user_form.non_field_errors %}

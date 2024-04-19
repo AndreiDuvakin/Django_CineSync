@@ -5,37 +5,34 @@
 {% endblock title %}
 {% block content %}
 <link href="{% static 'css/home/homepage.css' %}" rel="stylesheet">
-<div class="carousel_films">
-    <h1 class="header_title">Сейчас в прокате</h1>
-    <div id="carouselWhite" class="carousel carousel slide">
-        <div class="carousel-indicators">
-            {% for film in films_preview %}
-            <button type="button" data-bs-target="#carouselWhite" data-bs-slide-to="{{ forloop.counter0 }}"
-                    class="{% if forloop.counter0 == 0 %} active {% endif %}"
-                    aria-current="true" aria-label="{{film.name|truncatewords_html:5}}"></button>
-            {% endfor %}
-        </div>
-        <div class="carousel-inner">
-            {% for film in films_preview %}
-            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" data-bs-interval="10">
-                <img src="{{ film.image.url }}" class="d-block w-100 film_preview_image"
-                     alt="Фотография фильма не найдена">
-                <div class="carousel-caption d-none d-md-block caption_block">
-                    <h5>{{ film.name }}</h5>
-                    <p>{{ film.description|truncatewords_html:10|safe }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselWhite" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselWhite" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+<div id="carouselWhite" class="carousel carousel slide carousel_films" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for film in films_preview %}
+        <button type="button" data-bs-target="#carouselWhite" data-bs-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.counter0 == 0 %} active {% endif %}"
+                aria-current="true" aria-label="{{film.name|truncatewords_html:5}}"></button>
+        {% endfor %}
     </div>
+    <div class="carousel-inner">
+        {% for film in films_preview %}
+        <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" data-bs-interval="10000">
+            <img src="{{ film.image.url }}" class="d-block w-100 film_preview_image"
+                 alt="Фотография фильма не найдена">
+            <div class="carousel-caption d-none d-md-block caption_block">
+                <h5>{{ film.name }}</h5>
+                <p>{{ film.description|truncatewords_html:10|safe }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselWhite" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselWhite" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
 <div class="timetable_block">
     <h1 class="header_title">Расписание</h1>
@@ -48,7 +45,7 @@
                         data-bs-toggle="tab" data-bs-target="#content-{{ date|date:'Y-m-d' }}"
                         type="button" role="tab" aria-controls="content-{{ date|date:'Y-m-d' }}"
                         aria-selected="true">
-                    {% if date|date == now|date %}
+                    {% if date|date == today|date %}
                     Сегодня
                     {% elif date|date == tomorrow|date %}
                     Завтра
@@ -74,12 +71,19 @@
                     Картинки нет :(
                     {% endif %}
                     <div class="film_card_column">
-                        <label class="film_card_column_item">{{film.name}}</label>
+                        <div class="film_card_title_row">
+                            <label>{{film.name}}</label>
+                        </div>
                         <div class="film_card_row">
                             {% for time_sessions in session %}
-                            <div class="film_session">
-                                <a class="session_time">{{ time_sessions.start_datetime|time:"H:i" }}</a>
-                            </div>
+                            <a class="film_session" href="">
+                                <div class="session_time">{{ time_sessions.start_datetime|time:"H:i" }}</div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="film_card_footer">
+                            {% for genre in film.genres.all %}
+                            <div class="badge text-bg-secondary genre">{{genre.name}}</div>
                             {% endfor %}
                         </div>
                     </div>

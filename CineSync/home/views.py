@@ -1,13 +1,8 @@
 import datetime
 from datetime import date
-from collections import defaultdict
-from pprint import pprint
-from random import shuffle
 
-from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from films.models import Film
 from timetable.models import FilmSession
 
@@ -15,23 +10,31 @@ from timetable.models import FilmSession
 def homepage(request):
     films = Film.objects.on_main()
     film_sessions = FilmSession.objects.nearest_timetable()
-    sessions_by_date_and_film = defaultdict(lambda: defaultdict(list))
+    sessions_by_date_and_film = {}
 
     for session in film_sessions:
         session_date = session.start_datetime.date()
-        sessions_by_date_and_film[session_date][session.film].append(session)
+        if session_date not in sessions_by_date_and_film:
+            sessions_by_date_and_film[session_date] = {}
+        film_sessions_for_date = sessions_by_date_and_film[session_date]
+        if session.film not in film_sessions_for_date:
+            film_sessions_for_date[session.film] = []
+        film_sessions_for_date[session.film].append(session)
 
-    for session in film_sessions:
-        session_date = session.start_datetime.date()
-        sessions_by_date_and_film[session_date] = dict(sessions_by_date_and_film[session_date])
+    for session_date, session_films in sessions_by_date_and_film.items():
+        for session_film in session_films:
+            sessions_by_date_and_film[session_date][session_film].sort(
+                key=lambda sorted_session: sorted_session.start_datetime,
+            )
 
     template = render(
         request,
         'home/homepage.html',
         context={
             'films_preview': films,
-            'films_sessions': dict(sessions_by_date_and_film),
-            'tomorrow': date.today() + datetime.timedelta(days=1)
+            'films_sessions': sessions_by_date_and_film,
+            'today': date.today(),
+            'tomorrow': date.today() + datetime.timedelta(days=1),
         }
     )
     return HttpResponse(

@@ -77,9 +77,6 @@ class ProfileForm(forms.ModelForm):
             model.birthday.field.name,
             model.image.field.name,
         ]
-        widgets = {
-            model.birthday.field.name: DateInput(attrs={'type': 'date'})
-        }
 
 
 class CustomUserChangeForm(UserChangeForm):
