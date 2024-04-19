@@ -1,0 +1,12 @@
+.session_details {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #eaeaea;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    border-radius: 3vw;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
