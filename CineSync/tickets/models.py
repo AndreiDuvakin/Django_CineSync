@@ -33,3 +33,8 @@ class Ticket(Model):
         validators=[MinValueValidator(1)],
         help_text='Номер кресла в ряду',
     )
+
+    class Meta:
+        db_table = 'tickets_ticket'
+        verbose_name = 'Билет'
+        verbose_name_plural = 'Билеты'

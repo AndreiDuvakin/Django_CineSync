@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ session.film.name }}
+{% endblock title %}
+{% block content %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/tickets/ticket.css' %}" rel="stylesheet">
+<form method="POST">
+    <div class="session_details">
+        <img src="{{ session.film.image.url }}" class="ticket_film_image">
+        {{ session.price }}<br>
+        {{ session.film.name }}<br>
+        {{ session.auditorium }}<br>
+        {{ session.start_datetime }} - {{ session.end_datetime }}<br>
+        <a type="submit" class="btn btn-primary">{% if text_button %} {{ text_button }} {% else %} Купить {% endif %}</a>
+    </div>
+</form>
+{% endblock %}
