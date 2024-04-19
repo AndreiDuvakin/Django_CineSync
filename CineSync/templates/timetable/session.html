@@ -10,25 +10,21 @@
   <img src="{{ session.film.image.url }}" class="film_session_image"
                    alt="Фотография фильма не найдена">
 </div>
-<div class="seats_card"
-     style="width: 50%; height:
-     {{ height }}px;
-     margin: 0 auto; margin-top: 20px"
->
-  <div style="width: 80%; margin-top: 80px; margin: 0 auto;">
+<div class="seats_card" style="height: {{ height }}px;">
+  <div class="card_body">
     <h1>{{ session.film.name }}</h1>
     {{ session.auditorium.number }}<br>
     {{ session.start_datetime }}
-    <div style="margin-top: 20%;">
-      <div class="line" style="margin-left: 5%; margin-top: 150px;">
-        <h6 style="text-align: center; margin-top: 4px">Экран</h6>
+    <div class="rows">
+      <div class="line">
+        <h6>Экран</h6>
       </div>
       {% for row in session.auditorium.row_count|get_range %}
         <div class="row">
           {% for seat in seats %}
-          <div class="film_card_row col">
+          <div class="film_card_row col-auto">
               <a class="film_session">
-                  <span style="width: 20px; height: 18px; text-align: center;">{{ seat.row_number }}</span>
+                  <span class="seat_number">{{ seat.row_number }}</span>
               </a>
           </div>
           {% endfor %}
@@ -37,7 +33,7 @@
       {% endfor %}
     </div>
     <div style="text-align: center">
-      <button class="btn btn-primary" style="float: bottom; margin-top: 40px;">Купить билет</button>
+      <button class="btn btn-primary buy_btn">Купить билет</button>
     </div>
   </div>
 </div>
