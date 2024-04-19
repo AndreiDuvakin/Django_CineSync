@@ -21,6 +21,17 @@ class FilmSessionsManager(Manager):
         )
         return films_sessions
 
+    def all_timetable(self):
+        current_datetime = timezone.now()
+        films_sessions = super().get_queryset().filter(
+            start_datetime__gte=current_datetime,
+        ).prefetch_related(
+            FilmSession.film.field.name,
+        ).order_by(
+            FilmSession.start_datetime.field.name,
+        )
+        return films_sessions
+
 
 class Auditorium(Model):
     number = CharField(

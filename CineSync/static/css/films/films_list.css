@@ -48,6 +48,7 @@
 }
 .films_block {
     margin-top: 5vw;
+    margin-bottom: 5vw;
 }
 .film_preview_card:hover .film_preview_card_text_block {
     opacity: 1;

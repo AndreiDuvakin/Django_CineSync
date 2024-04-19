@@ -1,7 +1,7 @@
 .film_preview_image {
     object-fit: cover;
-    height: 30vw !important;
-    width: 70% !important;
+    height: 35vw !important;
+    width: 25vw !important;
     border-radius: 3vw;
 }
 .ticket_film_image {
@@ -57,7 +57,7 @@
 }
 .film_card_image {
     object-fit: cover;
-    height: 10vw !important;
+    height: 15vw !important;
     width: 10vw !important;
     border-radius: 3vw;
 }
@@ -126,7 +126,6 @@
 .genre {
     margin-right: 0.5vw;
 }
-
 body::-webkit-scrollbar {
     width: 8px;
 }

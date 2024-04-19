@@ -1,12 +1,14 @@
 .carousel_films {
-    margin-top: 5vw;
-    height: 30vw;
-    width: 100%;
+    margin-top: 1vw;
+    height: 35vw;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 .carousel-item-next, .carousel-item-prev, .carousel-item.active {
     display: flex;
     justify-content: center;
 }
 .carousel_title {
-    margin-top: 5vw;
+    margin-top: 3vw;
 }

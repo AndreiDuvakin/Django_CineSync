@@ -1,0 +1,15 @@
+<li class="nav-item" role="presentation">
+    <button class="nav-link tab_btn {% if forloop.counter0 == 0 %} active {% endif %}"
+            id="tab-{{ date }}"
+            data-bs-toggle="tab" data-bs-target="#content-{{ date|date:'Y-m-d' }}"
+            type="button" role="tab" aria-controls="content-{{ date|date:'Y-m-d' }}"
+            aria-selected="true">
+        {% if date|date == today|date %}
+        Сегодня
+        {% elif date|date == tomorrow|date %}
+        Завтра
+        {% else %}
+        {{ date|date:"j M" }}
+        {% endif %}
+    </button>
+</li>

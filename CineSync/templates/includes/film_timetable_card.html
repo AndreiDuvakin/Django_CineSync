@@ -1,0 +1,25 @@
+<div class="film_card">
+    {% if film.image %}
+    <img src="{{ film.image.url }}" class="d-block w-100 film_card_image film_card_item"
+         alt="Фотография фильма не найдена">
+    {% else %}
+    <p class="no-image-msg">Картинки нет :(</p>
+    {% endif %}
+    <div class="film_card_column">
+        <div class="film_card_title_row">
+            <label>{{film.name}}</label>
+        </div>
+        <div class="film_card_row">
+            {% for time_sessions in session %}
+            <a class="film_session" href={% url 'tickets:tickets' sess_id=time_sessions.id %}>
+            <div class="session_time">{{ time_sessions.start_datetime|time:"H:i" }}</div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="film_card_footer">
+            {% for genre in film.genres.all %}
+            <div class="badge text-bg-secondary genre">{{genre.name}}</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
