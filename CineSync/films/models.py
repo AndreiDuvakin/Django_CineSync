@@ -8,7 +8,7 @@ from django.db.models import (
     IntegerField,
     DateField,
     ManyToManyField,
-    Manager, ImageField,
+    Manager, ImageField, Min,
 )
 from django.utils import timezone
 from django.core.validators import MinValueValidator
@@ -21,6 +21,16 @@ class FilmManager(Manager):
         return super().get_queryset().filter(
             release_date__lt=timezone.now(),
         )
+
+    def will_be_shown(self):
+        current_datetime = timezone.now()
+        films_with_sessions = super().get_queryset().filter(
+            sessions__start_datetime__gte=current_datetime,
+        ).annotate(
+            nearest_session=Min('sessions__start_datetime')
+        ).order_by('nearest_session')
+
+        return films_with_sessions
 
     def on_main(self):
         current_datetime = timezone.now()

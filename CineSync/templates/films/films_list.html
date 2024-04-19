@@ -1,1 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
+{% block title %}
+Фильмы
+{% endblock title %}
+{% block content %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/films/films_list.css' %}" rel="stylesheet">
+<div class="films_block">
+    <h1 class="header_title carousel_title">Смотрите в прокате</h1>
+    <div class="films_list row row-cols-3">
+        {% for film in films %}
+        <a class="film_preview_card col" href="{% url 'films:film_details' film_id=film.id %}"
+             style="{% if film.image %}background-image: url('{{ film.image.url }}'){% else %}background-color: #eaeaea{% endif %};">
+            <div class="film_preview_card_text_block">
+                <h3>{{ film.name }}</h3>
+                <p>{{ film.description|truncatewords_html:10 }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

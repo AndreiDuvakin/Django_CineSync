@@ -5,7 +5,7 @@ from films.models import Film
 
 
 def films_list(request: HttpResponse) -> HttpResponse:
-    films = Film.objects.released()
+    films = Film.objects.will_be_shown()
     return render(
         request,
         'films/films_list.html',
