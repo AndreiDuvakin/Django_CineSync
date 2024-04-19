@@ -1,45 +1,3 @@
-.film_preview_image {
-    object-fit: cover;
-    height: 35vw !important;
-    width: 25vw !important;
-    border-radius: 3vw;
-}
-.film_session_image {
-    margin-top: 40px;
-    object-fit: cover;
-    height: 20vw !important;
-    width: 50% !important;
-    border-radius: 3vw;
-}
-.line {
-    width: 30%;
-    height: 5px;
-    background-color: black;
-    position: absolute;
-    top: 70%;
-    border-radius: 3vw;
-    margin-left: 5%;
-    margin-top: 150px;
-}
-h6 {
-    text-align: center;
-    margin-top: 4px;
-}
-.seat_number {
-    width: 20px;
-    height: 18px;
-    text-align: center;
-}
-.buy_btn {
-    float: bottom;
-    margin-top: 40px;
-}
-.ticket_film_image {
-    object-fit: cover;
-    height: 20vw !important;
-    width: 25% !important;
-    border-radius: 3vw;
-}
 .caption_block {
     background-color: rgba(13, 39, 58, 0.8);
     border-radius: 2vw;
@@ -72,30 +30,6 @@ h6 {
     padding-top: 2vw;
     padding-bottom: 2vw;
     flex-direction: column;
-}
-.seats_card {
-    width: 100%;
-    background-color: #eaeaea;
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-    border-radius: 3vw;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 20px;
-}
-.card_body {
-    width: 80%;
-    margin-top: 180px;
-    margin: 0 auto;
-}
-.rows {
-    margin-top: 30%;
 }
 .film_card {
     width: 100%;

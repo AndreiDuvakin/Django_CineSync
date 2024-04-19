@@ -6,11 +6,12 @@
 {% endblock %}
 {% block content %}
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/timetable/session.css' %}" rel="stylesheet">
 <div style="text-align: center;">
   <img src="{{ session.film.image.url }}" class="film_session_image"
                    alt="Фотография фильма не найдена">
 </div>
-<div class="seats_card" style="height: {{ height }}px;">
+<div class="seats_card" style="height: {{ height }}vw;">
   <div class="card_body">
     <h1>{{ session.film.name }}</h1>
     {{ session.auditorium.number }}<br>
