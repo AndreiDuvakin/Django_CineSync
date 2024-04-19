@@ -9,7 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('films/', include('films.urls'), name='films'),
     path('timetable/', include('timetable.urls'), name='timetable'),
-    path('ticket/<int:sess_id>', include('tickets.urls'), name='tickets'),
     path("auth/", include("users.urls"), name="auth"),
     path("auth/", include("django.contrib.auth.urls"), name="auth"),
 ]
