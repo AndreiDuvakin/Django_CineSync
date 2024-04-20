@@ -3,17 +3,17 @@ from django.contrib import admin
 from timetable.models import Auditorium, Row, FilmSession
 
 
+class RowAdminInline(admin.StackedInline):
+    model = Row
+
+
 @admin.register(Auditorium)
 class AuditoriumAdmin(admin.ModelAdmin):
     list_display = [
         Auditorium.number.field.name,
     ]
-
-
-@admin.register(Row)
-class RowAdmin(admin.ModelAdmin):
-    list_display = [
-        Row.row_number.field.name,
+    inlines = [
+        RowAdminInline,
     ]
 
 

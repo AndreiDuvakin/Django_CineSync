@@ -1,3 +1,4 @@
+import pprint
 from json import loads
 
 from django import forms
@@ -13,9 +14,9 @@ class SeatSelectionForm(forms.Form):
     def __init__(self, *args, auditorium: Auditorium, **kwargs):
         super().__init__(*args, **kwargs)
         choices = []
-        for row in auditorium.rows.all():
-            for seat in range(1, auditorium.row_count + 1):
-                choices.append((f'[{seat}, {row.row_number}]', f'[{seat}, {row.row_number}]'))
+        for i, row in enumerate(auditorium.rows.all(), start=1):
+            for seat in range(1, row.column_count + 1):
+                choices.append((f'[{seat}, {str(i)}]', f'[{seat}, {str(i)}]'))
         self.fields['selected_seats'].choices = choices
 
         for field in self.visible_fields():

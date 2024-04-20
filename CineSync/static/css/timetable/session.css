@@ -6,19 +6,21 @@
     background-color: #eaeaea;
     border-radius: 3vw;
     display: flex;
+    width: 46%;
+    max-height: 50vw;
+    overflow-x: scroll;
+    overflow-y: scroll;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    width: 46%;
-    overflow-x: auto;
-    overflow-y: auto;
+}
+.table_card {
+    margin: 3vw;
 }
 .seat_checkbox {
     display: none;
 }
 .seat_checkbox:checked + .seat_number {
-    color: #ffffff;
+    color: #eaeaea;
 }
 .selected {
     background-color: #0d1d3a;
@@ -79,7 +81,8 @@
 .cell {
     background-color: transparent !important;
     height: 4vw;
-    width: 3.5vw;
+    min-width: 3.5vw;
+    
 }
 .row_number_cell {
     display: flex;
@@ -89,6 +92,7 @@
 }
 .seats_card::-webkit-scrollbar {
     height: 7px;
+    width: 7px;
 }
 .seats_card::-webkit-scrollbar-thumb {
     background-color: #0d1d3a;
