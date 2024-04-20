@@ -92,7 +92,7 @@ class FilmSession(Model):
     )
 
     end_datetime = DateTimeField(
-        verbose_name='Дата и время начала сеанса',
+        verbose_name='Дата и время окончания сеанса',
         blank=True,
         null=True,
     )
