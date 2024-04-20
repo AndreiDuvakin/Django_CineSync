@@ -48,10 +48,6 @@ def session_view(request, sess_id):
         id=sess_id,
     )
     height = round(session.auditorium.rows.count() * 4 + 7)
-    row_with_most_seats = Row.objects.filter(auditorium=session.auditorium).only('column_count').annotate(
-        max_seats=Max('column_count')
-    ).order_by('-max_seats').first()
-    width = round(row_with_most_seats.column_count * 4 + 3)
 
     if request.method == 'POST':
         form = SeatSelectionForm(request.POST, auditorium=session.auditorium)
@@ -65,7 +61,6 @@ def session_view(request, sess_id):
         'session': session,
         'height': height,
         'form': form,
-        'width': width
     }
     template = 'timetable/session.html'
     return render(request, template, context)

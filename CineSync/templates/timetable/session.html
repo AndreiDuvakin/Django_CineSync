@@ -23,7 +23,10 @@
     </div>
 </div>
 <form class="seats_card" method="post" style="height: {{ height }}vw;">
+    <button type="submit" class="btn btn-primary buy_btn">Купить билет</button>
     {% csrf_token %}
+    <hr class="horizontal_line">
+    <p class="display_title">Экран</p>
     <table class="table_card">
         <tbody>
         {% for row in session.auditorium.rows.all %}
@@ -43,6 +46,5 @@
         </tbody>
     </table>
 </form>
-<button type="submit" class="btn btn-primary buy_btn">Купить билет</button>
 <script src="{% static 'js/timetable/session.js' %}"></script>
 {% endblock %}

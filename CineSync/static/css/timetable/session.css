@@ -7,7 +7,7 @@
     border-radius: 3vw;
     display: flex;
     width: 46%;
-    max-height: 50vw;
+    max-height: 50vw !important ;
     overflow-x: scroll;
     overflow-y: scroll;
     flex-direction: column;
@@ -15,6 +15,7 @@
 }
 .table_card {
     margin: 3vw;
+    margin-top: 1.5vw;
 }
 .seat_checkbox {
     display: none;
@@ -34,8 +35,9 @@
     text-align: center;
 }
 .buy_btn {
-    float: bottom;
-    margin-top: 1.5vw;
+    margin-top: 2vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
 }
 .ticket_film_image {
     object-fit: cover;
@@ -105,4 +107,14 @@
 .film_info_description::-webkit-scrollbar-thumb {
     background-color: #eaeaea;
     border-radius: 5vw;
+}
+.horizontal_line {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    border-top: 10px solid; 
+}
+.display_title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2vw;
 }
