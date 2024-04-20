@@ -39,13 +39,6 @@ class Auditorium(Model):
         verbose_name='Номер кинозала',
     )
 
-    # row_count = IntegerField(
-    #     verbose_name='Количество рядов кресел в зале',
-    #     validators=[
-    #         MinValueValidator(1),
-    #     ],
-    # )
-
     def __str__(self):
         return self.number
 
