@@ -12,9 +12,3 @@
 .carousel_title {
     margin-top: 3vw;
 }
-.film_preview_image {
-    object-fit: cover;
-    height: 35vw !important;
-    width: 25vw !important;
-    border-radius: 3vw;
-}
