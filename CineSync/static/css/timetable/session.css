@@ -1,35 +1,30 @@
 .seats_card {
+    margin-left: 27%;
+    margin-right: 27%;
+    margin-top: 2vw;
+    margin-bottom: 5vw;
     background-color: #eaeaea;
     border-radius: 3vw;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 2vw;
-
+    width: 46%;
     overflow-x: auto;
     overflow-y: auto;
 }
-.card_body {
-    width: 80%;
+.seat_checkbox {
+    display: none;
 }
-.line {
-    width: 30%;
-    height: 0.5vw;
-    background-color: black;
-    position: absolute;
-    top: 70%;
-    border-radius: 3vw;
-    margin-left: 5%;
-    margin-top: 8vw;
+.seat_checkbox:checked + .seat_number {
+    color: #ffffff;
 }
-h6 {
-    text-align: center;
-    margin-top: 0.4vw;
+.selected {
+    background-color: #0d1d3a;
+}
+.selected:hover {
+    background-color: #0d1d3a;
 }
 .seat_number {
     width: 1vw;
@@ -54,29 +49,35 @@ h6 {
     border-radius: 3vw;
 }
 .film_info_block {
-    margin-right: 25%;
-    margin-left: 25%;
-    width: 50%;
+    margin-top: 5vw;
+    margin-right: 27%;
+    margin-left: 27%;
+    width: 46%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: flex-end;
+    height: 20vw;
+    overflow-y: auto;
 }
 .film_info_text_block {
     height: 20vw;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: space-evenly;
-    margin: 2vw;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 1vw;
 }
-.film_info_text {
+.film_info_text, .film_info_description {
     color: #eaeaea;
+}
+.film_info_description {
+    max-height: 9.9vw;
+    overflow-y: auto;
 }
 .cell {
     background-color: transparent !important;
-}
-.cell {
     height: 4vw;
     width: 3.5vw;
 }
@@ -84,4 +85,20 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 3vw;
+}
+.seats_card::-webkit-scrollbar {
+    height: 7px;
+}
+.seats_card::-webkit-scrollbar-thumb {
+    background-color: #0d1d3a;
+    border-radius: 5vw;
+    border: 1px solid #eaeaea;
+}
+.film_info_description::-webkit-scrollbar {
+    width: 5px;
+}
+.film_info_description::-webkit-scrollbar-thumb {
+    background-color: #eaeaea;
+    border-radius: 5vw;
 }

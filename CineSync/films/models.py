@@ -117,6 +117,19 @@ class Film(Model):
         help_text='Жанры фильма',
     )
 
+    age_limit = CharField(
+        help_text='Возрастное ограничение',
+        max_length=3,
+        null=False,
+        choices=(
+            ['0+', '0+'],
+            ['6+', '0+'],
+            ['12+', '12+'],
+            ['16+', '16+'],
+            ['18+', '18+'],
+        ),
+    )
+
     def get_image_300x300(self):
         return sorl.thumbnail.get_thumbnail(
             self.image,

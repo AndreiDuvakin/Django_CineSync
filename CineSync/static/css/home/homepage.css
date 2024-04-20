@@ -18,3 +18,11 @@
     width: 25vw !important;
     border-radius: 3vw;
 }
+.film_card_column::-webkit-scrollbar {
+    height: 7px;
+}
+.film_card_column::-webkit-scrollbar-thumb {
+    background-color: #0d1d3a;
+    border-radius: 5vw;
+    border: 1px solid #ffffff;
+}

@@ -3,9 +3,9 @@ from datetime import date
 
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from timetable.models import FilmSession, Row
 
-from timetable.models import FilmSession
+from timetable.models import FilmSession, Row
+from timetable.forms import SeatSelectionForm
 
 
 def timetable_view(request):
@@ -45,7 +45,11 @@ def session_view(request, sess_id):
         FilmSession.objects.all(),
         id=sess_id,
     )
-    height = session.auditorium.row_count * 6
+    height = round(session.auditorium.row_count * 4 + 7)
+
+    if request.method == 'POST':
+        print(request.data)
+
     context = {
         'session': session,
         'seats': Row.objects.filter(auditorium_id=session.auditorium.id),
