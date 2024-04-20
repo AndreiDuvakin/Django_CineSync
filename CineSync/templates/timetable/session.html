@@ -14,29 +14,33 @@
         <h1 class="film_info_text">{{ session.film.name }}</h1>
         <p class="film_info_text">{{ session.auditorium.number }}</p>
         <p class="film_info_text">{{ session.start_datetime }}</p>
+        <p class="film_info_description">{{ session.film.description }}</p>
+        <div class="tags_block">
+            {% for genre in session.film.genres.all %}
+            <div class="badge text-bg-secondary genre">{{genre.name}}</div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 <div class="seats_card" style="height: {{ height }}vw;">
-    <div class="card_body">
-        <table>
-            <tbody>
-            {% for row in session.auditorium.row_count|get_range %}
-            <tr>
-                <td class="row_number_cell cell">{{ row }}</td>
-                {% for seat in seats %}
-                <td class="cell">
-                    <a class="film_session">
-                        <span class="seat_number">{{ seat.row_number }}</span>
-                    </a>
-                </td>
-                {% endfor %}
-            </tr>
+    <table>
+        <tbody>
+        {% for row in session.auditorium.row_count|get_range %}
+        <tr>
+            <td class="row_number_cell cell">Ряд {{ row }}</td>
+            {% for seat in seats %}
+            <td class="cell">
+                <a class="film_session">
+                    <span class="seat_number">{{ seat.row_number }}</span>
+                </a>
+            </td>
             {% endfor %}
-            </tbody>
-        </table>
-        <div>
-            <button class="btn btn-primary buy_btn">Купить билет</button>
-        </div>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary buy_btn">Купить билет</button>
     </div>
 </div>
 

@@ -45,7 +45,7 @@ def session_view(request, sess_id):
         FilmSession.objects.all(),
         id=sess_id,
     )
-    height = session.auditorium.row_count * 6
+    height = round(session.auditorium.row_count * 4 + 7)
     context = {
         'session': session,
         'seats': Row.objects.filter(auditorium_id=session.auditorium.id),
