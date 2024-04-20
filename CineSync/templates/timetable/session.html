@@ -23,26 +23,28 @@
     </div>
 </div>
 <div class="seats_card" style="height: {{ height }}vw;">
-    <table>
-        <tbody>
-        {% for row in session.auditorium.row_count|get_range %}
-        <tr>
-            <td class="row_number_cell cell">Ряд {{ row }}</td>
-            {% for seat in seats %}
-            <td class="cell">
-                <label class="film_session">
-                    <input type="checkbox" class="seat_checkbox" value="{{ seat.row_number }}">
-                    <span class="seat_number">{{ seat.row_number }}</span>
-                </label>
-            </td>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tbody>
+            {% for row in session.auditorium.rows.all %}
+            <tr>
+                <td class="row_number_cell cell">Ряд {{ row.row_number }}</td>
+                {% for seat in seats %}
+                <td class="cell">
+                    <label class="film_session">
+                        <input type="checkbox" name="selected_seats"
+                               value="[{{ seat.row_number }}, {{ row.row_number }}]" class="seat_checkbox">
+                        <span class="seat_number">{{ seat.row_number }}</span>
+                    </label>
+                </td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div>
-        <button class="btn btn-primary buy_btn">Купить билет</button>
-    </div>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary buy_btn">Купить билет</button>
+    </form>
 </div>
 <script src="{% static 'js/timetable/session.js' %}"></script>
 {% endblock %}

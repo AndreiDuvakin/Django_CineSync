@@ -2,9 +2,9 @@
     checkbox.addEventListener('change', function() {
         var filmSession = checkbox.closest('.film_session');
         if (checkbox.checked) {
-            filmSession.classList.add('selected'); // Добавляем класс, если чекбокс выбран
+            filmSession.classList.add('selected');
         } else {
-            filmSession.classList.remove('selected'); // Удаляем класс, если чекбокс не выбран
+            filmSession.classList.remove('selected');
         }
     });
 });

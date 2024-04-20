@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from timetable.models import FilmSession, Row
+
 from timetable.forms import SeatSelectionForm
 
 
@@ -40,6 +41,9 @@ def timetable_view(request):
     )
 
 
+from django.shortcuts import redirect
+
+
 def session_view(request, sess_id):
     session = get_object_or_404(
         FilmSession.objects.all(),
@@ -48,12 +52,18 @@ def session_view(request, sess_id):
     height = round(session.auditorium.row_count * 4 + 7)
 
     if request.method == 'POST':
-        print(request.data)
+        form = SeatSelectionForm(request.POST, auditorium=session.auditorium)
+        if form.is_valid():
+            selected_seats = form.clean_selected_seats()
+            # return redirect('куда-то-перенаправление-после-выбора-мест')
+    else:
+        form = SeatSelectionForm(auditorium=session.auditorium)
 
     context = {
         'session': session,
         'seats': Row.objects.filter(auditorium_id=session.auditorium.id),
         'height': height,
+        'form': form,
     }
     template = 'timetable/session.html'
     return render(request, template, context)
