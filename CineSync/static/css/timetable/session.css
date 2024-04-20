@@ -1,0 +1,60 @@
+.seats_card {
+    width: 100%;
+    background-color: #eaeaea;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 2vw;
+}
+.card_body {
+    width: 80%;
+    margin-top: 18vw;
+    margin: 0 auto;
+}
+.rows {
+    margin-top: 7vw;
+}
+.line {
+    width: 30%;
+    height: 0.5vw;
+    background-color: black;
+    position: absolute;
+    top: 70%;
+    border-radius: 3vw;
+    margin-left: 5%;
+    margin-top: 8vw;
+}
+h6 {
+    text-align: center;
+    margin-top: 0.4vw;
+}
+.seat_number {
+    width: 1vw;
+    height: 1.1vw;
+    text-align: center;
+}
+.buy_btn {
+    float: bottom;
+    margin-top: 1.5vw;
+}
+.ticket_film_image {
+    object-fit: cover;
+    height: 20vw !important;
+    width: 25% !important;
+    border-radius: 3vw;
+}
+.film_session_image {
+    margin-top: 4vw;
+    object-fit: cover;
+    height: 20vw !important;
+    width: 50% !important;
+    border-radius: 3vw;
+}
