@@ -82,6 +82,9 @@ class Director(Model):
         max_length=100,
     )
 
+    def __str__(self):
+        return f'{self.last_name} {self.first_name}'
+
     class Meta:
         db_table = 'films_directors'
         verbose_name = 'Режиссер'
@@ -101,6 +104,9 @@ class Actor(Model):
         max_length=100,
     )
 
+    def __str__(self):
+        return f'{self.last_name} {self.first_name}'
+
     class Meta:
         db_table = 'films_actors'
         verbose_name = 'Актер'
@@ -113,6 +119,9 @@ class Country(Model):
         help_text='Название страны',
         max_length=500,
     )
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'films_countries'
@@ -189,7 +198,7 @@ class Film(Model):
     )
 
     countries = ManyToManyField(
-        Director,
+        Country,
         related_name='country_films',
         related_query_name='country_films',
     )
