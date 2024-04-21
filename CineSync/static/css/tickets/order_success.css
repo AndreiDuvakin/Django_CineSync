@@ -1,0 +1,19 @@
+.order_info_block {
+    height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text_block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.order_success_title, .order_success_text, .order_success_btn {
+    color: #eaeaea;
+}
+.order_success_image {
+    width: 20vw;
+}

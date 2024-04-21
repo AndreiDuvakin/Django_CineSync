@@ -82,7 +82,7 @@ def session_view(request, sess_id):
                         column_number=seat[1],
                     )
 
-                return redirect(reverse('home:homepage'))
+                return redirect(reverse('tickets:order_success'))
     else:
         form = SeatSelectionForm(auditorium=session.auditorium)
 

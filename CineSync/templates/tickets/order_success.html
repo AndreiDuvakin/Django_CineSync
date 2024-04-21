@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tags %}
+{% block title %}
+Заказ оформлен
+{% endblock %}
+{% block content %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/tickets/order_success.css' %}" rel="stylesheet">
+<div class="order_info_block">
+    <div class="text_block">
+        <h1 class="order_success_title">Заказ успешно оформлен</h1>
+        <img class="order_success_image" src="{% static 'img/success.png' %}">
+        <p class="order_success_text">Скоро он станет доступен в списке ваших заказов</p>
+        <a class="btn btn-primary" href="{% url 'home:homepage' %}">Отлично</a>
+    </div>
+</div>
+{% endblock %}
