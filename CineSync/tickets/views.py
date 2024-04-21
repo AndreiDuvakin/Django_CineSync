@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_list_or_404
 
 from tickets.models import Order, Ticket
 
@@ -15,11 +15,16 @@ def order_success(request):
 @login_required
 def my_orders(request):
     user = request.user
-    orders = get_object_or_404(
+    orders = get_list_or_404(
         Order.objects.filter(
             profile__id=user.profile.id,
         ).prefetch_related(
             'tickets',
         )
     )
-    return render(request, 'tickets/my_orders.html')
+    context = {
+        'orders': orders,
+    }
+    template = 'tickets/my_orders.html'
+
+    return render(request, template, context)
