@@ -17,6 +17,12 @@
                     <a class="nav-link {% if view_name == 'time_table:main' %} active {% endif %}"
                        href="{% url 'time_table:main' %}">Расписание</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name == 'tickets:my_orders' %} active {% endif %}"
+                       href="{% url 'tickets:my_orders' %}">Мои заказы</a>
+                </li>
+                {% endif %}
                 {% endwith %}
             </ul>
         </div>

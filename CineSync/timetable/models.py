@@ -26,7 +26,12 @@ class FilmSessionsManager(Manager):
 
     def all_timetable(self):
         current_datetime = timezone.now()
-        films_sessions = super().get_queryset().filter(
+        films_sessions = super().get_queryset().select_related(
+            'film',
+        ).prefetch_related(
+            'film__genres',
+            'film__countries',
+        ).filter(
             start_datetime__gte=current_datetime,
         ).prefetch_related(
             FilmSession.film.field.name,

@@ -260,42 +260,28 @@ FROM
    
 
    
--- Определим временной промежуток в рамках рабочего времени кинотеатра (8:00 - 22:00)
+-- Определим временной промежуток в рамках рабочего дня кинотеатра (10:00 - 22:00)
 WITH RECURSIVE session_times AS (
-  SELECT strftime('%Y-%m-%d %H:%M', 'now', 'start of day', '+8 hours') AS start_time
+  SELECT strftime('%Y-%m-%d %H:%M', 'now', 'start of day', '+10 hours') AS start_datetime
   UNION ALL
-  SELECT strftime('%Y-%m-%d %H:%M', start_time, '+2 hours') FROM session_times
-  WHERE start_time < strftime('%Y-%m-%d %H:%M', 'now', 'start of day', '+22 hours')
+  SELECT strftime('%Y-%m-%d %H:%M', start_datetime, '+2 hours') FROM session_times
+  WHERE start_datetime < strftime('%Y-%m-%d %H:%M', 'now', 'start of day', '+22 hours')
 )
 
-
---INSERT INTO timetable_film_sessions (start_datetime, price, auditorium_id, film_id)
+-- Вставим сеансы для каждого фильма в каждый зал
+INSERT INTO timetable_film_sessions (start_datetime, price, auditorium_id, film_id)
 SELECT 
-    CASE 
-        WHEN MAX(end_datetime) IS NULL THEN start_datetime
-        ELSE MAX(end_datetime)
-    END AS start_time,
-    500.00 AS price, 
+    start_datetime,
+    10.00 AS price,  -- Укажите цену билета здесь
     auditoriums.id AS auditorium_id,
     films.id AS film_id
 FROM 
-    session_times
-CROSS JOIN
-    films_films AS films
-CROSS JOIN
+    session_times,
+    films_films AS films,
     timetable_auditoriums AS auditoriums
-LEFT JOIN 
-    timetable_film_sessions AS prev_sessions
-ON 
-    auditoriums.id = prev_sessions.auditorium_id
-AND 
-    prev_sessions.start_datetime <= start_datetime
-AND
-    prev_sessions.start_datetime + (films.duration || ' MINUTES') >= start_datetime
-GROUP BY
-    start_time, auditoriums.id, films.id
 ORDER BY
-    start_time, film_id;
+    start_datetime, film_id;
+
 
 
    
@@ -345,4 +331,25 @@ INSERT INTO films_countries (name) VALUES
     ('Испания');
 
    
+-- Добавление режиссеров к фильмам
+INSERT INTO films_films_directors (film_id, director_id)
+SELECT f.id AS film_id, d.id AS director_id
+FROM films_films AS f
+JOIN films_directors AS d ON d.id <= f.id
+WHERE f.id BETWEEN 1 AND 40;
+
+-- Добавление актеров к фильмам
+INSERT INTO films_films_actors (film_id, actor_id)
+SELECT f.id AS film_id, a.id AS actor_id
+FROM films_films AS f
+JOIN films_actors AS a ON a.id <= f.id
+WHERE f.id BETWEEN 1 AND 40;
+
+-- Добавление стран к фильмам
+INSERT INTO films_films_countries (film_id, country_id)
+SELECT f.id AS film_id, c.id AS country_id
+FROM films_films AS f
+JOIN films_countries AS c ON c.id <= f.id
+WHERE f.id BETWEEN 1 AND 40;
+
 
