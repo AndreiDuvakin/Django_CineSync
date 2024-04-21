@@ -48,7 +48,13 @@ def timetable_view(request):
 @login_required
 def session_view(request, sess_id):
     session = get_object_or_404(
-        FilmSession.objects.all(),
+        FilmSession.objects.select_related(
+            'film',
+            'auditorium',
+        ).prefetch_related(
+            'auditorium__rows',
+            'film__genres',
+        ),
         id=sess_id,
     )
     height = round(session.auditorium.rows.count() * 4 + 7)
