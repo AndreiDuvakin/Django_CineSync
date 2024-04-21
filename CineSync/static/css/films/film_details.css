@@ -1,0 +1,32 @@
+.film_preview_image {
+  height: 35vw !important;
+  width: 20vw !important;
+  margin-top: 3%;
+  margin-left: 22%;
+  width: 10%;
+}
+.description_card {
+  width: 32%;
+  height: 35vw !important;
+  background-color: #eaeaea;
+  border-radius: 3vw;
+  float: right;
+  margin-top: 0;
+  margin-bottom: 1vw;
+  margin-right: 22%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+.card_text_head {
+  width: 50%;
+  margin-left: 7%;
+  margin-top: 7%;
+}
+.card_text {
+  margin-left: 7%;
+}
+.sessions_list {
+  margin-top: 5%;
+}
