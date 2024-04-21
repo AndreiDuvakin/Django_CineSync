@@ -24,6 +24,6 @@ class SeatSelectionForm(forms.Form):
 
     def clean_selected_seats(self):
         selected_seats = self.cleaned_data['selected_seats']
-        if list[str] is type(self.cleaned_data):
+        if isinstance(selected_seats, list) and all(isinstance(item, str) for item in selected_seats):
             selected_seats = [loads(field) for field in selected_seats]
         return selected_seats

@@ -112,6 +112,9 @@ class FilmSession(Model):
         related_query_name='sessions',
     )
 
+    def __str__(self):
+        return f'{self.film.name} - {str(self.start_datetime)} - {self.auditorium}'
+
     def save(self, *args, **kwargs):
         if self.start_datetime and self.film.duration:
             self.end_datetime = self.start_datetime + timedelta(minutes=self.film.duration)

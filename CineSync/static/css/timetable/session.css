@@ -118,3 +118,6 @@
     text-align: center;
     font-size: 1.2vw;
 }
+.disabled {
+    background-color: #0d1d3a !important;
+}

@@ -41,6 +41,9 @@ class Profile(Model):
         related_query_name='profiles',
     )
 
+    def __str__(self):
+        return f'{self.user} - {self.user.last_name} {self.user.first_name}'
+
     def get_image_x300(self):
         return get_thumbnail(
             self.image,

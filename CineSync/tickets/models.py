@@ -1,8 +1,14 @@
-from django.db.models import ForeignKey, CASCADE, Model, IntegerField, DateField
+from django.db.models import ForeignKey, CASCADE, Model, IntegerField, DateTimeField, Manager
 from django.core.validators import MinValueValidator
 
 from timetable.models import FilmSession
 from users.models import Profile
+
+
+class TicketManager(Manager):
+    def get_tickets_for_session(self, session_id):
+        tickets = super().get_queryset().filter(order__session_id=session_id)
+        return tickets
 
 
 class Order(Model):
@@ -20,7 +26,7 @@ class Order(Model):
         related_query_name='orders',
     )
 
-    datetime_order = DateField(
+    datetime_order = DateTimeField(
         verbose_name='Дата и время оформления заказа',
         help_text='Дата и время оформления заказа',
     )
@@ -32,6 +38,8 @@ class Order(Model):
 
 
 class Ticket(Model):
+    objects = TicketManager()
+
     order = ForeignKey(
         Order,
         on_delete=CASCADE,

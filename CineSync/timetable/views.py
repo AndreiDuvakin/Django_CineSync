@@ -1,13 +1,16 @@
 import datetime
 from datetime import date
 
-from django.db.models import Max
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.utils import timezone
 
 from timetable.models import FilmSession, Row
-
 from timetable.forms import SeatSelectionForm
+from tickets.models import Order, Ticket
 
 
 def timetable_view(request):
@@ -42,6 +45,7 @@ def timetable_view(request):
     )
 
 
+@login_required
 def session_view(request, sess_id):
     session = get_object_or_404(
         FilmSession.objects.all(),
@@ -49,11 +53,30 @@ def session_view(request, sess_id):
     )
     height = round(session.auditorium.rows.count() * 4 + 7)
 
+    tickets = Ticket.objects.get_tickets_for_session(session.pk)
+    occupied_seats = [f'{str(ticket.column_number)}{str(ticket.row_number)}' for ticket in tickets]
+
     if request.method == 'POST':
         form = SeatSelectionForm(request.POST, auditorium=session.auditorium)
         if form.is_valid():
-            selected_seats = form.clean_selected_seats()
-            # return redirect('куда-то-перенаправление-после-выбора-мест')
+            with transaction.atomic():
+                selected_seats = form.clean_selected_seats()
+                user_profile = request.user.profile
+
+                order = Order.objects.create(
+                    session=session,
+                    profile=user_profile,
+                    datetime_order=timezone.now(),
+                )
+
+                for seat in selected_seats:
+                    Ticket.objects.create(
+                        order=order,
+                        row_number=seat[0],
+                        column_number=seat[1],
+                    )
+
+                return redirect(reverse('home:homepage'))
     else:
         form = SeatSelectionForm(auditorium=session.auditorium)
 
@@ -61,6 +84,7 @@ def session_view(request, sess_id):
         'session': session,
         'height': height,
         'form': form,
+        'occupied_seats': occupied_seats,
     }
     template = 'timetable/session.html'
     return render(request, template, context)

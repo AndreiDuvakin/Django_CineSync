@@ -34,11 +34,19 @@
             <td class="row_number_cell cell">Ряд {{ forloop.counter }}</td>
             {% for _ in row.column_count|get_range %}
             <td class="cell">
+                <label class="film_session disabled">
+                    <input type="checkbox" name="selected_seats"
+                           value="[{{ forloop.counter }}, {{ row.row_number }}]" class="seat_checkbox"
+                           disabled>
+                    <span class="seat_number">{{ forloop.counter }}</span>
+                </label>
+                {% else %}
                 <label class="film_session">
                     <input type="checkbox" name="selected_seats"
                            value="[{{ forloop.counter }}, {{ row.row_number }}]" class="seat_checkbox">
                     <span class="seat_number">{{ forloop.counter }}</span>
                 </label>
+                {% endif %}
             </td>
             {% endfor %}
         </tr>
