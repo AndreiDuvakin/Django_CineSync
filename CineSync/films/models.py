@@ -9,6 +9,7 @@ from django.db.models import (
     DateField,
     ManyToManyField,
     Manager, ImageField, Min,
+    ForeignKey, CASCADE,
 )
 from django.utils import timezone
 from django.core.validators import MinValueValidator
@@ -66,6 +67,57 @@ class Genre(Model):
         db_table = 'films_genres'
         verbose_name = 'Жанр'
         verbose_name_plural = 'Жанры'
+
+
+class Director(Model):
+    first_name = CharField(
+        'Имя',
+        help_text='Имя режиссера',
+        max_length=100,
+    )
+
+    last_name = CharField(
+        'Фамилия',
+        help_text='Фамилия режиссера',
+        max_length=100,
+    )
+
+    class Meta:
+        db_table = 'films_directors'
+        verbose_name = 'Режиссер'
+        verbose_name_plural = 'Режиссеры'
+
+
+class Actor(Model):
+    first_name = CharField(
+        'Имя',
+        help_text='Имя актера',
+        max_length=100,
+    )
+
+    last_name = CharField(
+        'Фамилия',
+        help_text='Фамилия актера',
+        max_length=100,
+    )
+
+    class Meta:
+        db_table = 'films_actors'
+        verbose_name = 'Актер'
+        verbose_name_plural = 'Актеры'
+
+
+class Country(Model):
+    name = CharField(
+        'Название',
+        help_text='Название страны',
+        max_length=500,
+    )
+
+    class Meta:
+        db_table = 'films_countries'
+        verbose_name = 'Страна'
+        verbose_name_plural = 'Страны'
 
 
 class Film(Model):
@@ -128,6 +180,24 @@ class Film(Model):
             ['16+', '16+'],
             ['18+', '18+'],
         ),
+    )
+
+    directors = ManyToManyField(
+        Director,
+        related_name='director_films',
+        related_query_name='director_films',
+    )
+
+    countries = ManyToManyField(
+        Director,
+        related_name='country_films',
+        related_query_name='country_films',
+    )
+
+    actors = ManyToManyField(
+        Actor,
+        related_name='actor_films',
+        related_query_name='actor_films',
     )
 
     def get_image_300x300(self):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from films.models import Film, Genre
+from films.models import Film, Genre, Actor, Director, Country
 
 
 @admin.register(Film)
@@ -16,6 +16,9 @@ class FilmAdmin(admin.ModelAdmin):
 
     filter_horizontal = [
         Film.genres.field.name,
+        Film.directors.field.name,
+        Film.countries.field.name,
+        Film.actors.field.name,
     ]
 
     def get_image(self, obj):
@@ -28,4 +31,27 @@ class FilmAdmin(admin.ModelAdmin):
 class GenreAdmin(admin.ModelAdmin):
     list_display = [
         Genre.name.field.name,
+    ]
+
+
+@admin.register(Actor)
+class ActorAdmin(admin.ModelAdmin):
+    list_display = [
+        Actor.first_name.field.name,
+        Actor.last_name.field.name,
+    ]
+
+
+@admin.register(Director)
+class DirectorAdmin(admin.ModelAdmin):
+    list_display = [
+        Director.first_name.field.name,
+        Director.last_name.field.name,
+    ]
+
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    list_display = [
+        Country.name.field.name,
     ]
