@@ -9,8 +9,15 @@
     {% endif %}
     <div class="film_card_column">
         <div class="film_card_title_row">
-            <label>{{film.name}}</label>
+            <label class="film_title">{{film.name}}</label>
             <span class="age_limit">{{ film.age_limit }}</span>
+            <div class="countries_block">
+                {% for country in film.countries.all %}
+                <div class="countries">
+                    <span>{{ country }}</span>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         <div class="film_card_row">
             {% for time_sessions in session %}

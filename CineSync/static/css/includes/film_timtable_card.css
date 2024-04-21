@@ -68,3 +68,38 @@
     flex-direction: row;
     flex-wrap: nowrap;
 }
+.countries_block {
+    max-width: 15vw;
+    overflow-x: auto;
+    margin-left: 0.8vw;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 0.2vw;
+    border-radius: 0.5vw;
+}
+.countries {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-left: 0.1vw;
+    flex-direction: row;
+}
+.countries span {
+    color: #aaaaaa;
+    font-weight: bold;
+    padding: 0.4vw;
+}
+.countries_block::-webkit-scrollbar {
+    height: 5px;
+}
+.countries_block::-webkit-scrollbar-thumb {
+    background-color: #0d1d3a;
+    border-radius: 5vw;
+    border: 2px solid #eaeaea;
+}
+.film_title {
+    font-size: 1.5vw;
+    max-width: 40vw;
+    overflow-y: auto;
+}

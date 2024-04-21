@@ -6,5 +6,5 @@ app_name = 'tickets'
 
 urlpatterns = [
     path('', ticket_view, name='tickets'),
-    path('/order/success', order_success, name='order_success'),
+    path('order/success', order_success, name='order_success'),
 ]

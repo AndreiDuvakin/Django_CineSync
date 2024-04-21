@@ -11,11 +11,14 @@ class FilmSessionsManager(Manager):
     def nearest_timetable(self):
         current_datetime = timezone.now()
         end_datetime = current_datetime + timedelta(days=5)
-        films_sessions = super().get_queryset().filter(
+        films_sessions = super().get_queryset().select_related(
+            'film',
+        ).prefetch_related(
+            'film__genres',
+            'film__countries',
+        ).filter(
             start_datetime__gte=current_datetime,
             start_datetime__lte=end_datetime,
-        ).prefetch_related(
-            FilmSession.film.field.name,
         ).order_by(
             FilmSession.start_datetime.field.name,
         )
