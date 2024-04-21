@@ -2,42 +2,56 @@
 {% block title %}{{ item.name }}{% endblock %}
 {% load static %}
 {% block content %}
-  <link href="{% static 'css/style.css' %}" rel="stylesheet">
-  <link href="{% static 'css/films/film_details.css' %}" rel="stylesheet">
-  <div class="description_card">
-    <div class="card_text_head">
-      <h2>{{ item.name }}</h2>
-      <hr>
-    </div>
-    <div class="card_text">
-      <div class="film_card_footer">
-            {% for genre in item.genres.all %}
-            <div class="badge text-bg-secondary genre">{{genre.name}}</div>
-            {% endfor %}
-      </div>
-      <br>
-      <p><strong><em>Длительность: {{ item.duration }} минута</em></strong></p>
-      <p><strong><em>Дата выхода: {{ item.release_date }}</em></strong></p>
-      {{ item.description }}
-        {% for date, sessions in film_sessions.items %}
-          <div class="row sessions_list">
-            {% for film, session in sessions.items %}
-            <div style="float: top; margin-bottom: 2%">{{ date|date:"j M" }}</div>
-              <div class="row time_cards">
-                {% for sess in session %}
-                  <div class="film_card_row col-auto">
-                    <a class="film_session">
-                      <div class="session_time">{{ sess.start_datetime|time:"H:i" }}</div>
-                    </a>
-                  </div>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/films/film_details.css' %}" rel="stylesheet">
+<div class="film_info_block">
+    <img src="{{ item.image.url }}" class="d-block w-100 film_preview_image"
+         alt="Фотография фильма не найдена">
+    <div class="description_card">
+        <div class="card_text_head">
+            <h2>{{ item.name }}</h2>
+            <hr>
+            <div class="span_info_block">
+                <span class="age_limit">{{ item.age_limit }}</span>
+                <div class="countries_block">
+                    {% for country in item.countries.all %}
+                    <div class="countries">
+                        <span>{{ country }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="card_text">
+            <div class="film_card_footer">
+                {% for genre in item.genres.all %}
+                <div class="badge text-bg-secondary genre">{{genre.name}}</div>
                 {% endfor %}
-              </div>
-            <div class="session_time">{{ session.start_datetime|time:"H:i" }}</div>
+            </div>
+            <br>
+            <p><strong><em>Длительность: {{ item.duration }} мин.</em></strong></p>
+            <p><strong><em>Дата выхода: {{ item.release_date }}</em></strong></p>
+            {{ item.description }}
+            <h2 class="session_title_block">Ближайшие сеансы</h2>
+            <hr>
+            {% for date, sessions in film_sessions.items %}
+            <div class="row sessions_list">
+                {% for film, session in sessions.items %}
+                <div>{{ date|date:"j M" }}</div>
+                <div class="row time_cards">
+                    {% for sess in session %}
+                    <div class="film_card_row col-auto">
+                        <a class="film_session" href="{% url 'time_table:session' sess_id=sess.id %}">
+                            <div class="session_time">{{ sess.start_datetime|time:"H:i" }}</div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="session_time">{{ session.start_datetime|time:"H:i" }}</div>
+                {% endfor %}
+            </div>
             {% endfor %}
-          </div>
-          {% endfor %}
-      </div>
+        </div>
     </div>
-  <img src="{{ item.image.url }}" class="d-block w-100 film_preview_image"
-       alt="Фотография фильма не найдена">
+</div>
 {% endblock %}
