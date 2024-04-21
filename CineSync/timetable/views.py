@@ -54,7 +54,7 @@ def session_view(request, sess_id):
     height = round(session.auditorium.rows.count() * 4 + 7)
 
     tickets = Ticket.objects.get_tickets_for_session(session.pk)
-    occupied_seats = [f'{str(ticket.column_number)}{str(ticket.row_number)}' for ticket in tickets]
+    occupied_seats = [f"{str(ticket.row_number)}-{str(ticket.column_number)}" for ticket in tickets]
 
     if request.method == 'POST':
         form = SeatSelectionForm(request.POST, auditorium=session.auditorium)

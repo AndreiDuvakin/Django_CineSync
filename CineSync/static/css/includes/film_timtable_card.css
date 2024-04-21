@@ -1,0 +1,70 @@
+.age_limit {
+    margin-left: 1vw;
+    padding: 0.1vw;
+    padding-left: 0.25vw;
+    padding-right: 0.25vw;
+    border: 0.15vw solid #aaaaaa;
+    color: #aaaaaa;
+    font-weight: bold;
+    border-radius: 0.5vw;
+    font-size: 0.7vw;
+}
+.film_card {
+    width: 100%;
+    background-color: #eaeaea;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+.film_card_image {
+    object-fit: cover;
+    height: 15vw !important;
+    width: 10vw !important;
+    border-radius: 3vw;
+}
+.film_card_column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 10vw;
+    margin-left: 2vw;
+    overflow-x: scroll;
+}
+.film_card_column::-webkit-scrollbar {
+    height: 7px;
+}
+.film_card_column::-webkit-scrollbar-thumb {
+    background-color: #0d1d3a;
+    border-radius: 5vw;
+    border: 1px solid #eaeaea;
+}
+.film_card_title_row {
+    height: 20%;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.film_card_row {
+    height: 60%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.film_card_footer {
+    height: 20%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
