@@ -39,12 +39,7 @@
   margin-top: 5vw;
 }
 .description_card::-webkit-scrollbar {
-    width: 7px;
-}
-.description_card::-webkit-scrollbar-thumb {
-    background-color: #0d1d3a;
-    border-radius: 5vw;
-    border: 1px solid #eaeaea;
+    display: none;
 }
 .session_title_block {
   margin-top: 1vw;

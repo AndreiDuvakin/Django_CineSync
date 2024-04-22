@@ -1,6 +1,7 @@
 {% load static %}
 <link href="{% static 'css/includes/film_timtable_card.css' %}" rel="stylesheet">
 <div class="film_card">
+
     {% if film.image %}
     <img src="{{ film.image.url }}" class="d-block w-100 film_card_image film_card_item"
          alt="Фотография фильма не найдена">
@@ -9,8 +10,9 @@
     {% endif %}
     <div class="film_card_column">
         <div class="film_card_title_row">
-            <label class="film_title">{{film.name}}</label>
+            <label class="film_title">{{ film.name }}</label>
             <span class="age_limit">{{ film.age_limit }}</span>
+            <span class="film_duration">{{ film.duration }}мин.</span>
             <div class="countries_block">
                 {% for country in film.countries.all %}
                 <div class="countries">

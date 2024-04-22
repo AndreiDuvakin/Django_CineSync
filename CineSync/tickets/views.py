@@ -18,12 +18,17 @@ def my_orders(request):
     orders = get_list_or_404(
         Order.objects.filter(
             profile__id=user.profile.id,
+        ).select_related(
+            'session',
+            'session__film',
         ).prefetch_related(
             'tickets',
+        ).order_by(
+            '-datetime_order'
         )
     )
     context = {
-        'orders': orders,
+        'my_orders': orders,
     }
     template = 'tickets/my_orders.html'
 

@@ -1,15 +1,4 @@
-.age_limit {
-    margin-left: 1vw;
-    padding: 0.1vw;
-    padding-left: 0.25vw;
-    padding-right: 0.25vw;
-    border: 0.15vw solid #aaaaaa;
-    color: #aaaaaa;
-    font-weight: bold;
-    border-radius: 0.5vw;
-    font-size: 0.7vw;
-}
-.film_card {
+.my_order_card {
     width: 100%;
     background-color: #eaeaea;
     margin-top: 1vw;
@@ -20,6 +9,17 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-start;
+}
+.age_limit {
+    margin-left: 1vw;
+    padding: 0.1vw;
+    padding-left: 0.25vw;
+    padding-right: 0.25vw;
+    border: 0.15vw solid #aaaaaa;
+    color: #aaaaaa;
+    font-weight: bold;
+    border-radius: 0.5vw;
+    font-size: 0.7vw;
 }
 .film_card_image {
     object-fit: cover;
@@ -32,7 +32,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-around;
-    height: 10vw;
+    height: 13vw;
     margin-left: 2vw;
     overflow-x: scroll;
 }
@@ -45,7 +45,7 @@
     border: 1px solid #eaeaea;
 }
 .film_card_title_row {
-    height: 20%;
+    height: 17%;
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
     display: flex;
@@ -55,14 +55,14 @@
     justify-content: space-evenly;
 }
 .film_card_row {
-    height: 60%;
+    height: 66%;
     display: flex;
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
 }
 .film_card_footer {
-    height: 20%;
+    height: 17%;
     display: flex;
     align-items: flex-start;
     flex-direction: row;
@@ -110,4 +110,21 @@
     background-color: #0d1d3a;
     border-radius: 5vw;
     border: 1px solid #eaeaea;
+}
+.ticket {
+    background-color: #0d1d3a;
+    padding: 0.5vw;
+    color: #eaeaea;
+    margin: 1vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: bold;
+    border-radius: 1vw;
+    width: 5vw;
+}
+.column {
+    width: 18vw;
 }

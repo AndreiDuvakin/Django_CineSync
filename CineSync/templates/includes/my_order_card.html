@@ -1,0 +1,42 @@
+{% load static %}
+<link href="{% static 'css/includes/my_order_card.css' %}" rel="stylesheet">
+<div class="my_order_card">
+    {% if order.session.film.image %}
+    <img src="{{ order.session.film.image.url }}" class="d-block w-100 film_card_image film_card_item"
+         alt="Фотография фильма не найдена">
+    {% else %}
+    <p class="no-image-msg">Картинки нет :( {{order.session.film}}</p>
+    {% endif %}
+    <div class="film_card_column">
+        <div class="film_card_title_row">
+            <label class="film_title">{{ order.session.film.name }}</label>
+            <span class="age_limit">{{ order.session.film.age_limit }}</span>
+            <span class="film_duration">{{ order.session.film.duration }}мин.</span>
+            <div class="countries_block">
+                {% for country in order.session.film.countries.all %}
+                <div class="countries">
+                    <span>{{ country }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="film_card_row">
+            <div class="column">
+                <p class="film_info_text">{{ order.session.auditorium.number }}</p>
+                <p class="film_info_text">{{ order.session.start_datetime }}</p>
+                <p class="film_info_text">Заказ от: {{ order.datetime_order }}</p>
+            </div>
+            {% for ticket in order.tickets.all %}
+            <div class="ticket">
+                <label>Ряд - {{ticket.row_number}}</label>
+                <label>Место - {{ticket.column_number}}</label>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="film_card_footer">
+            {% for genre in order.session.film.genres.all %}
+            <div class="badge text-bg-secondary genre">{{genre.name}}</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

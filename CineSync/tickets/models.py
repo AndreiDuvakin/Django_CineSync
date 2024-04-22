@@ -31,6 +31,9 @@ class Order(Model):
         help_text='Дата и время оформления заказа',
     )
 
+    def __str__(self):
+        return f'{self.profile} {self.session}'
+
     class Meta:
         db_table = 'tickets_orders'
         verbose_name = 'Заказ'
