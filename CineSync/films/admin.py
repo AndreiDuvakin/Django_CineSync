@@ -9,6 +9,7 @@ class FilmAdmin(admin.ModelAdmin):
     list_display = [
         Film.name.field.name,
         Film.duration.field.name,
+        Film.image.field.name,
         'get_image',
     ]
 
@@ -19,6 +20,10 @@ class FilmAdmin(admin.ModelAdmin):
         Film.directors.field.name,
         Film.countries.field.name,
         Film.actors.field.name,
+    ]
+
+    list_editable = [
+        Film.image.field.name,
     ]
 
     def get_image(self, obj):

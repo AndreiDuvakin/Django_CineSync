@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.forms import DateInput, ModelForm
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordChangeForm,
@@ -8,7 +9,6 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     UserCreationForm,
 )
-from django.forms import DateInput
 
 from users.models import Profile
 
@@ -65,18 +65,21 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email')
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(ModelForm):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
 
-    class Meta(forms.ModelForm):
+    class Meta(ModelForm):
         model = Profile
         fields = [
             model.birthday.field.name,
             model.image.field.name,
         ]
+        widgets = {
+            'birthday': DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+        }
 
 
 class CustomUserChangeForm(UserChangeForm):

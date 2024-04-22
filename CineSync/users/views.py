@@ -36,6 +36,7 @@ def signup(request):
 def profile(request):
     profile_form = ProfileForm(
         request.POST or None,
+        request.FILES or None,
         instance=request.user.profile,
     )
     user_form = UserForm(
@@ -58,3 +59,4 @@ def profile(request):
             'user': request.user,
         },
     )
+

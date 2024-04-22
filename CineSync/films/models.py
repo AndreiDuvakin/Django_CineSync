@@ -2,6 +2,7 @@ import time
 from datetime import timedelta
 
 import sorl
+from django.core.validators import MinValueValidator
 from django.db.models import (
     Model,
     CharField,
@@ -9,10 +10,8 @@ from django.db.models import (
     DateField,
     ManyToManyField,
     Manager, ImageField, Min,
-    ForeignKey, CASCADE,
 )
 from django.utils import timezone
-from django.core.validators import MinValueValidator
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
