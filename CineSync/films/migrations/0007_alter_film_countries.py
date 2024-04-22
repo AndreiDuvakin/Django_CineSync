@@ -6,7 +6,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("films", "0006_actor_country_director_film_actors_film_countries_and_more"),
+        (
+            "films",
+            "0006_actor_country_director_film_actors_film_countries_and_more",
+        ),
     ]
 
     operations = [

@@ -1,12 +1,9 @@
-from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django.views.generic import View
 
-from users.forms import SignUpForm, ProfileForm, UserForm
+from users.forms import ProfileForm, SignUpForm, UserForm
 from users.models import Profile
 
 __all__ = []
@@ -59,4 +56,3 @@ def profile(request):
             'user': request.user,
         },
     )
-

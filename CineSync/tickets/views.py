@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render
 
-from tickets.models import Order, Ticket
+from tickets.models import Order
 
 
 def order_success(request):
@@ -11,16 +11,11 @@ def order_success(request):
 @login_required
 def my_orders(request):
     user = request.user
-    orders = Order.objects.filter(
-        profile__id=user.profile.id,
-    ).select_related(
-        'session',
-        'session__film',
-    ).prefetch_related(
-        'tickets',
-    ).order_by(
-        '-datetime_order'
-    )
+    queryset = Order.objects.filter(profile__id=user.profile.id)
+    queryset = queryset.select_related('session', 'session__film')
+    queryset = queryset.prefetch_related('tickets')
+    orders = queryset.order_by('-datetime_order')
+
     context = {
         'my_orders': orders,
     }

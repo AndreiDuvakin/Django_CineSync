@@ -4,13 +4,13 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 
-from timetable.models import FilmSession, Row
-from timetable.forms import SeatSelectionForm
 from tickets.models import Order, Ticket
+from timetable.forms import SeatSelectionForm
+from timetable.models import FilmSession
 
 
 def timetable_view(request):
@@ -21,9 +21,11 @@ def timetable_view(request):
         session_date = session.start_datetime.date()
         if session_date not in sessions_by_date_and_film:
             sessions_by_date_and_film[session_date] = {}
+
         film_sessions_for_date = sessions_by_date_and_film[session_date]
         if session.film not in film_sessions_for_date:
             film_sessions_for_date[session.film] = []
+
         film_sessions_for_date[session.film].append(session)
 
     for session_date, session_films in sessions_by_date_and_film.items():
@@ -31,6 +33,7 @@ def timetable_view(request):
             sessions_by_date_and_film[session_date][session_film].sort(
                 key=lambda sorted_session: sorted_session.start_datetime,
             )
+
     template = render(
         request,
         'timetable/timetable.html',
@@ -38,7 +41,7 @@ def timetable_view(request):
             'films_sessions': sessions_by_date_and_film,
             'today': date.today(),
             'tomorrow': date.today() + datetime.timedelta(days=1),
-        }
+        },
     )
     return HttpResponse(
         template,
@@ -60,7 +63,10 @@ def session_view(request, sess_id):
     height = round(session.auditorium.rows.count() * 4 + 7)
 
     tickets = Ticket.objects.get_tickets_for_session(session.pk)
-    occupied_seats = [f"{str(ticket.row_number)}-{str(ticket.column_number)}" for ticket in tickets]
+    occupied_seats = [
+        f'{str(ticket.row_number)}-{str(ticket.column_number)}'
+        for ticket in tickets
+    ]
 
     if request.method == 'POST':
         form = SeatSelectionForm(request.POST, auditorium=session.auditorium)

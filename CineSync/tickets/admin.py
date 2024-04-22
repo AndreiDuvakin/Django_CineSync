@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tickets.models import Ticket, Order
+from tickets.models import Order, Ticket
 
 
 class TicketAdminInline(admin.StackedInline):

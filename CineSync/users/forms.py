@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.forms import DateInput, ModelForm
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordChangeForm,
@@ -8,6 +7,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     UserCreationForm,
 )
+from django.forms import DateInput, ModelForm
 
 from users.models import Profile
 

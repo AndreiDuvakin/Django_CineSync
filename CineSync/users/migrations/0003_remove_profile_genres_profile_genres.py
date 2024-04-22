@@ -19,7 +19,9 @@ class Migration(migrations.Migration):
             model_name="profile",
             name="genres",
             field=models.ManyToManyField(
-                related_name="profiles", related_query_name="profiles", to="films.genre"
+                related_name="profiles",
+                related_query_name="profiles",
+                to="films.genre",
             ),
         ),
     ]

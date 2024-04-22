@@ -1,7 +1,15 @@
 import time
 
 from django.conf import settings
-from django.db.models import Model, OneToOneField, CASCADE, DateField, CharField, ImageField, ManyToManyField
+from django.db.models import (
+    CASCADE,
+    CharField,
+    DateField,
+    ImageField,
+    ManyToManyField,
+    Model,
+    OneToOneField,
+)
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 

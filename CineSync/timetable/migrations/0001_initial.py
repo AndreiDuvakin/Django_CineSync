@@ -26,12 +26,16 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "number",
-                    models.CharField(max_length=20, verbose_name="Номер кинозала"),
+                    models.CharField(
+                        max_length=20, verbose_name="Номер кинозала"
+                    ),
                 ),
                 (
                     "row_count",
                     models.IntegerField(
-                        validators=[django.core.validators.MinValueValidator(1)],
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
                         verbose_name="Количество рядов кресел в зале",
                     ),
                 ),
@@ -57,14 +61,18 @@ class Migration(migrations.Migration):
                 (
                     "row_number",
                     models.IntegerField(
-                        validators=[django.core.validators.MinValueValidator(1)],
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
                         verbose_name="Номер ряда",
                     ),
                 ),
                 (
                     "column_count",
                     models.IntegerField(
-                        validators=[django.core.validators.MinValueValidator(1)],
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
                         verbose_name="Количество кресел в ряду",
                     ),
                 ),

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from timetable.views import timetable_view, session_view
+from timetable.views import session_view, timetable_view
 
 app_name = 'time_table'
 

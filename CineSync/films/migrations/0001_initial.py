@@ -62,14 +62,17 @@ class Migration(migrations.Migration):
                     "duration",
                     models.IntegerField(
                         help_text="Продолжительность фильма (в минутах)",
-                        validators=[django.core.validators.MinValueValidator(0)],
+                        validators=[
+                            django.core.validators.MinValueValidator(0)
+                        ],
                         verbose_name="Продолжительность",
                     ),
                 ),
                 (
                     "release_date",
                     models.DateField(
-                        help_text="Дата выхода фильма", verbose_name="Дата релиза"
+                        help_text="Дата выхода фильма",
+                        verbose_name="Дата релиза",
                     ),
                 ),
                 (

@@ -1,5 +1,12 @@
-from django.db.models import ForeignKey, CASCADE, Model, IntegerField, DateTimeField, Manager
 from django.core.validators import MinValueValidator
+from django.db.models import (
+    CASCADE,
+    DateTimeField,
+    ForeignKey,
+    IntegerField,
+    Manager,
+    Model,
+)
 
 from timetable.models import FilmSession
 from users.models import Profile
@@ -7,8 +14,7 @@ from users.models import Profile
 
 class TicketManager(Manager):
     def get_tickets_for_session(self, session_id):
-        tickets = super().get_queryset().filter(order__session_id=session_id)
-        return tickets
+        return super().get_queryset().filter(order__session_id=session_id)
 
 
 class Order(Model):

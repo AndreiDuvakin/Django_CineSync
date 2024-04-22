@@ -1,15 +1,16 @@
-import time
 from datetime import timedelta
+import time
 
-import sorl
 from django.core.validators import MinValueValidator
 from django.db.models import (
-    Model,
     CharField,
-    IntegerField,
     DateField,
+    ImageField,
+    IntegerField,
+    Manager,
     ManyToManyField,
-    Manager, ImageField, Min,
+    Min,
+    Model,
 )
 from django.utils import timezone
 from django.utils.safestring import mark_safe
@@ -18,36 +19,51 @@ from sorl.thumbnail import get_thumbnail
 
 class FilmManager(Manager):
     def released(self):
-        return super().get_queryset().filter(
-            release_date__lt=timezone.now(),
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                release_date__lt=timezone.now(),
+            )
         )
 
     def will_be_shown(self):
         current_datetime = timezone.now()
-        films_with_sessions = super().get_queryset().filter(
-            sessions__start_datetime__gte=current_datetime,
-        ).annotate(
-            nearest_session=Min('sessions__start_datetime')
-        ).order_by('nearest_session')
-
-        return films_with_sessions
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                sessions__start_datetime__gte=current_datetime,
+            )
+            .annotate(nearest_session=Min('sessions__start_datetime'))
+            .order_by('nearest_session')
+        )
 
     def on_main(self):
         current_datetime = timezone.now()
         end_datetime = current_datetime + timedelta(days=5)
-        films_with_sessions = super().get_queryset().filter(
-            sessions__start_datetime__gte=current_datetime,
-            sessions__start_datetime__lte=end_datetime,
-        ).exclude(image=None).distinct().only(
-            Film.name.field.name,
-            Film.image.field.name,
-            Film.description.field.name,
+        queryset = super().get_queryset()
+        films_with_sessions = (
+            queryset.filter(
+                sessions__start_datetime__gte=current_datetime,
+                sessions__start_datetime__lte=end_datetime,
+            )
+            .exclude(image=None)
+            .distinct()
+            .only(
+                Film.name.field.name,
+                Film.image.field.name,
+                Film.description.field.name,
+            )
         )
 
         if films_with_sessions.count() > 5:
             films_with_sessions = films_with_sessions[:5]
         elif films_with_sessions.count() > 0:
-            films_with_sessions = films_with_sessions[:films_with_sessions.count()]
+            films_with_sessions = films_with_sessions[
+                : films_with_sessions.count()
+            ]
+
         return films_with_sessions
 
 
@@ -209,23 +225,23 @@ class Film(Model):
     )
 
     def get_image_300x300(self):
-        return sorl.thumbnail.get_thumbnail(
+        return get_thumbnail(
             self.image,
-            "300x300",
-            crop="center",
+            '300x300',
+            crop='center',
             quality=51,
         )
 
     def image_tmb(self):
         if self.image:
-            tag = f"{self.get_image_300x300().url}"
+            tag = f'{self.get_image_300x300().url}'
             return mark_safe(tag)
 
-        return "Нет изорбражения"
+        return 'Нет изорбражения'
 
-    image_tmb.field_name = "image_tmb"
+    image_tmb.field_name = 'image_tmb'
     image_tmb.allow_tags = True
-    image_tmb.short_description = "Превью"
+    image_tmb.short_description = 'Превью'
 
     class Meta:
         db_table = 'films_films'

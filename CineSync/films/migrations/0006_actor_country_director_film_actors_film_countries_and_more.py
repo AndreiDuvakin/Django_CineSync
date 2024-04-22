@@ -25,7 +25,9 @@ class Migration(migrations.Migration):
                 (
                     "first_name",
                     models.CharField(
-                        help_text="Имя актера", max_length=100, verbose_name="Имя"
+                        help_text="Имя актера",
+                        max_length=100,
+                        verbose_name="Имя",
                     ),
                 ),
                 (
@@ -85,7 +87,9 @@ class Migration(migrations.Migration):
                 (
                     "first_name",
                     models.CharField(
-                        help_text="Имя режиссера", max_length=100, verbose_name="Имя"
+                        help_text="Имя режиссера",
+                        max_length=100,
+                        verbose_name="Имя",
                     ),
                 ),
                 (

@@ -6,7 +6,6 @@ from django.urls import reverse_lazy
 from users.forms import (
     CustomAuthenticationForm,
     CustomPasswordChangeForm,
-    CustomSetPasswordForm,
 )
 from users.views import profile, signup
 

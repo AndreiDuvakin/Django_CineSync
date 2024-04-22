@@ -30,12 +30,16 @@ class Migration(migrations.Migration):
                 (
                     "birthday",
                     models.DateField(
-                        blank=True, null=True, verbose_name="Дата рождения пользователя"
+                        blank=True,
+                        null=True,
+                        verbose_name="Дата рождения пользователя",
                     ),
                 ),
                 (
                     "role",
-                    models.CharField(max_length=20, verbose_name="Роль пользователя"),
+                    models.CharField(
+                        max_length=20, verbose_name="Роль пользователя"
+                    ),
                 ),
                 (
                     "image",

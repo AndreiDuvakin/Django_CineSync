@@ -14,7 +14,9 @@ class Migration(migrations.Migration):
             model_name="filmsession",
             name="end_datetime",
             field=models.DateTimeField(
-                blank=True, null=True, verbose_name="Дата и время начала сеанса"
+                blank=True,
+                null=True,
+                verbose_name="Дата и время начала сеанса",
             ),
         ),
     ]

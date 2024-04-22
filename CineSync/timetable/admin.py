@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from timetable.models import Auditorium, Row, FilmSession
+from timetable.models import Auditorium, FilmSession, Row
 
 
 class RowAdminInline(admin.StackedInline):

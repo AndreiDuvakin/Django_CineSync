@@ -31,12 +31,16 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "start_datetime",
-                    models.DateTimeField(verbose_name="Дата и время начала сеанса"),
+                    models.DateTimeField(
+                        verbose_name="Дата и время начала сеанса"
+                    ),
                 ),
                 (
                     "price",
                     models.FloatField(
-                        validators=[django.core.validators.MinValueValidator(1)],
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
                         verbose_name="Цена билета",
                     ),
                 ),

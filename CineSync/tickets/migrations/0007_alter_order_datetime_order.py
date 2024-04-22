@@ -6,7 +6,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("tickets", "0006_remove_ticket_profile_remove_ticket_session_and_more"),
+        (
+            "tickets",
+            "0006_remove_ticket_profile_remove_ticket_session_and_more",
+        ),
     ]
 
     operations = [

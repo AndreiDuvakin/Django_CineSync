@@ -3,6 +3,7 @@ from datetime import date
 
 from django.http import HttpResponse
 from django.shortcuts import render
+
 from films.models import Film
 from timetable.models import FilmSession
 
@@ -16,9 +17,11 @@ def homepage(request):
         session_date = session.start_datetime.date()
         if session_date not in sessions_by_date_and_film:
             sessions_by_date_and_film[session_date] = {}
+
         film_sessions_for_date = sessions_by_date_and_film[session_date]
         if session.film not in film_sessions_for_date:
             film_sessions_for_date[session.film] = []
+
         film_sessions_for_date[session.film].append(session)
 
     for session_date, session_films in sessions_by_date_and_film.items():
@@ -35,7 +38,7 @@ def homepage(request):
             'films_sessions': sessions_by_date_and_film,
             'today': date.today(),
             'tomorrow': date.today() + datetime.timedelta(days=1),
-        }
+        },
     )
     return HttpResponse(
         template,
