@@ -72,3 +72,27 @@ body::-webkit-scrollbar-thumb {
     border-radius: 5vw;
     border: 2px solid #0d1d3a;
 }
+
+.error_code {
+    font-size: 5vw;
+    color: #eaeaea;
+}
+
+.error_title, .error_text {
+    color: #eaeaea;    
+}
+
+.error_info_block {
+    height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text_block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,14 +5,17 @@ from dotenv import load_dotenv
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="google")
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='google')
 
-DEBUG = os.getenv("DJANGO_DEBUG", default="false")
-DEBUG = DEBUG.lower().strip() in ("true", "yes", "1", "y", "t")
+DEBUG = os.getenv('DJANGO_DEBUG', default='false')
+DEBUG = DEBUG.lower().strip() in ('true', 'yes', '1', 'y', 't')
 
-AUTH_USER_MODEL = "auth.User"
+AUTH_USER_MODEL = 'auth.User'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'films.apps.FilmsConfig',
@@ -26,9 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "sorl.thumbnail",
-    "ckeditor",
-    "django_cleanup.apps.CleanupConfig",
+    'sorl.thumbnail',
+    'ckeditor',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -43,10 +46,10 @@ MIDDLEWARE = [
 
 if DEBUG:
     INSTALLED_APPS += [
-        "debug_toolbar",
+        'debug_toolbar',
     ]
     MIDDLEWARE += [
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 
 ROOT_URLCONF = 'CineSync.urls'
@@ -55,7 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "templates",
+            BASE_DIR / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -70,9 +73,8 @@ TEMPLATES = [
 ]
 
 INTERNAL_IPS = [
-    "127.0.0.1",
-    "localhost",
-    "*",
+    '127.0.0.1',
+    'localhost',
 ]
 
 WSGI_APPLICATION = 'CineSync.wsgi.application'
@@ -101,13 +103,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
@@ -115,12 +117,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = "/media/"
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / 'media'
 
-LOGIN_URL = "/auth/login/"
+LOGIN_URL = '/auth/login/'
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL = "/auth/login/"
+LOGOUT_REDIRECT_URL = '/auth/login/'
