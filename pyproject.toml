@@ -1,0 +1,10 @@
+[tool.black]
+line-length = 79
+exclude = '''
+venv/
+.git/
+migrations/
+.dev/
+.prod/
+.test/
+'''
