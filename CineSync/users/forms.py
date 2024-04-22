@@ -3,12 +3,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordChangeForm,
-    PasswordResetForm,
     SetPasswordForm,
     UserChangeForm,
     UserCreationForm,
 )
-from django.forms import DateInput
 
 from users.models import Profile
 
@@ -36,16 +34,6 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 
 
 class CustomSetPasswordForm(SetPasswordForm):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
-    class Meta(forms.ModelForm):
-        fields = ('old_password', 'new_password', 'approve_new_password')
-
-
-class CustomPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
