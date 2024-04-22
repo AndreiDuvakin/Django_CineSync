@@ -22,40 +22,42 @@
         </div>
     </div>
 </div>
-<form class="seats_card" method="post" style="height: {{ height }}vw;">
-    <button type="submit" class="btn btn-primary buy_btn">Купить билет</button>
-    {% csrf_token %}
-    <hr class="horizontal_line">
-    <p class="display_title">Экран</p>
-    <table class="table_card">
-        <tbody>
-        {% for row in session.auditorium.rows.all %}
-        <tr>
-            <td class="row_number_cell cell">Ряд {{ forloop.counter }}</td>
-            {% for _ in row.column_count|get_range %}
-            <td class="cell">
-                {% with column_seat_str=forloop.counter|stringformat:"i" row_seat_str=row.row_number|stringformat:"i" %}
-                {% if column_seat_str|add:"-"|add:row_seat_str in occupied_seats %}
-                <label class="film_session disabled">
-                    <input type="checkbox" name="selected_seats"
-                           value="[{{ forloop.counter }}, {{ row.row_number }}]" class="seat_checkbox"
-                           disabled>
-                    <span class="seat_number">{{ forloop.counter }}</span>
-                </label>
-                {% else %}
-                <label class="film_session">
-                    <input type="checkbox" name="selected_seats"
-                           value="[{{ forloop.counter }}, {{ row.row_number }}]" class="seat_checkbox">
-                    <span class="seat_number">{{ forloop.counter }}</span>
-                </label>
-                {% endif %}
-                {% endwith %}
-            </td>
+<form class="seats_form" method="post">
+    <button type="submit" class="btn btn-primary buy_btn">Оформить заказ</button>
+    <div class="seats_card" style="height: {{ height }}vw;">
+        {% csrf_token %}
+        <hr class="horizontal_line">
+        <p class="display_title">Экран</p>
+        <table class="table_card">
+            <tbody>
+            {% for row in session.auditorium.rows.all %}
+            <tr>
+                <td class="row_number_cell cell">Ряд {{ forloop.counter }}</td>
+                {% for _ in row.column_count|get_range %}
+                <td class="cell">
+                    {% with column_seat_str=forloop.counter|stringformat:"i" row_seat_str=row.row_number|stringformat:"i" %}
+                    {% if column_seat_str|add:"-"|add:row_seat_str in occupied_seats %}
+                    <label class="film_session disabled">
+                        <input type="checkbox" name="selected_seats"
+                               value="[{{ forloop.counter }}, {{ row.row_number }}]" class="seat_checkbox"
+                               disabled>
+                        <span class="seat_number">{{ forloop.counter }}</span>
+                    </label>
+                    {% else %}
+                    <label class="film_session">
+                        <input type="checkbox" name="selected_seats"
+                               value="[{{ forloop.counter }}, {{ row.row_number }}]" class="seat_checkbox">
+                        <span class="seat_number">{{ forloop.counter }}</span>
+                    </label>
+                    {% endif %}
+                    {% endwith %}
+                </td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </form>
 <script src="{% static 'js/timetable/session.js' %}"></script>
 {% endblock %}

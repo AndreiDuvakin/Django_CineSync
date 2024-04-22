@@ -10,7 +10,7 @@ document.querySelectorAll('.seat_checkbox').forEach(function(checkbox) {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.seats_card');
+    const form = document.querySelector('.seats_form');
     const checkboxes = form.querySelectorAll('.seat_checkbox');
     const buyButton = form.querySelector('.buy_btn');
 

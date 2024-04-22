@@ -101,5 +101,14 @@
 .film_title {
     font-size: 1.5vw;
     max-width: 40vw;
-    overflow-y: auto;
+    text-wrap: nowrap;
+    overflow-x: auto;
+}
+.film_title::-webkit-scrollbar {
+    height: 7px;
+}
+.film_title::-webkit-scrollbar-thumb {
+    background-color: #0d1d3a;
+    border-radius: 5vw;
+    border: 1px solid #eaeaea;
 }

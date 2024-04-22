@@ -1,61 +1,56 @@
 .seats_card {
-    margin-left: 27%;
-    margin-right: 27%;
-    margin-top: 2vw;
-    margin-bottom: 5vw;
+    margin: 2vw auto 5vw;
     background-color: #eaeaea;
     border-radius: 3vw;
     display: flex;
     width: 46%;
-    max-height: 50vw !important ;
-    overflow-x: scroll;
-    overflow-y: scroll;
+    max-height: 50vw;
+    overflow: auto;
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
 .table_card {
     margin: 3vw;
     margin-top: 1.5vw;
 }
+
 .seat_checkbox {
     display: none;
 }
+
 .seat_checkbox:checked + .seat_number {
     color: #eaeaea;
 }
-.selected {
+
+.selected, .selected:hover {
     background-color: #0d1d3a;
 }
-.selected:hover {
-    background-color: #0d1d3a;
-}
+
 .seat_number {
     width: 1vw;
     height: 1.1vw;
     text-align: center;
 }
+
 .buy_btn {
     margin-top: 2vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
 }
-.ticket_film_image {
+
+.ticket_film_image, .film_session_image {
     object-fit: cover;
-    height: 20vw !important;
-    width: 25% !important;
+    height: 20vw;
+    width: 25%;
     border-radius: 3vw;
 }
+
 .film_session_image {
     margin-top: 4vw;
-    object-fit: cover;
-    height: 20vw !important;
-    width: 12vw !important;
-    border-radius: 3vw;
+    width: 12vw;
 }
+
 .film_info_block {
-    margin-top: 5vw;
-    margin-right: 27%;
-    margin-left: 27%;
+    margin: 5vw auto 0; 
     width: 46%;
     display: flex;
     flex-direction: row;
@@ -64,6 +59,7 @@
     height: 20vw;
     overflow-y: auto;
 }
+
 .film_info_text_block {
     height: 20vw;
     display: flex;
@@ -73,51 +69,61 @@
     align-items: flex-start;
     margin-left: 1vw;
 }
+
 .film_info_text, .film_info_description {
     color: #eaeaea;
 }
+
 .film_info_description {
     max-height: 9.9vw;
     overflow-y: auto;
 }
+
 .cell {
-    background-color: transparent !important;
+    background-color: transparent;
     height: 4vw;
     min-width: 3.5vw;
-    
 }
+
 .row_number_cell {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 3vw;
 }
+
 .seats_card::-webkit-scrollbar {
-    height: 7px;
-    width: 7px;
+    display: none;
 }
-.seats_card::-webkit-scrollbar-thumb {
-    background-color: #0d1d3a;
-    border-radius: 5vw;
-    border: 1px solid #eaeaea;
-}
+
 .film_info_description::-webkit-scrollbar {
     width: 5px;
 }
+
 .film_info_description::-webkit-scrollbar-thumb {
     background-color: #eaeaea;
     border-radius: 5vw;
 }
+
 .horizontal_line {
-    margin-left: 2vw;
-    margin-right: 2vw;
+    margin: 1vw 3.5vw;
     border-top: 10px solid; 
 }
+
 .display_title {
     width: 100%;
     text-align: center;
     font-size: 1.2vw;
 }
+
 .disabled {
     background-color: #5a5a5a !important;
+}
+
+.seats_form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
 }
