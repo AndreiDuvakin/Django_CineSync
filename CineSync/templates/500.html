@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Заказ оформлен
+{% endblock %}
+{% block content %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/tickets/order_success.css' %}" rel="stylesheet">
+<div class="error_info_block">
+    <div class="text_block">
+        <h1 class="error_title">Ошибка на сервере :(</h1>
+        <h1 class="error_code">500</h1>
+        <p class="error_text">Обратитесь к администратору сайта или зайдите позже</p>
+        <a class="btn btn-primary" href="{% url 'home:homepage' %}">На главную</a>
+    </div>
+</div>
+{% endblock %}
