@@ -7,7 +7,7 @@
 1) Скачать проект или склонировать репозиторий:
 
     ```bash
-    clone https://github.com/omixyy/MSU_aerosol_site
+    git clone https://github.com/omixyy/MSU_aerosol_site
     ```
 
 2) Создать виртуальное окружение:
