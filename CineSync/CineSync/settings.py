@@ -15,9 +15,7 @@ AUTH_USER_MODEL = 'auth.User'
 
 ALLOWED_HOSTS = os.getenv(
     'DJANGO_ALLOWED_HOSTS',
-    default=[
-        'localhost,127.0.0.1',
-    ],
+    default='localhost,127.0.0.1',
 ).split(',')
 
 INSTALLED_APPS = [
