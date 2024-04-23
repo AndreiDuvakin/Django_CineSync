@@ -145,3 +145,5 @@ cython_debug/
 /.test/
 /er.txt
 /Документы/Странички.drawio
+/CineSync/media/cache/
+/CineSync/media/users/
