@@ -27,7 +27,9 @@ class Migration(migrations.Migration):
                     "row_number",
                     models.IntegerField(
                         help_text="Номер ряда",
-                        validators=[django.core.validators.MinValueValidator(1)],
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
                         verbose_name="Номер ряда",
                     ),
                 ),
@@ -35,7 +37,9 @@ class Migration(migrations.Migration):
                     "column_number",
                     models.IntegerField(
                         help_text="Номер кресла в ряду",
-                        validators=[django.core.validators.MinValueValidator(1)],
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
                         verbose_name="Номер кресла",
                     ),
                 ),
