@@ -1,0 +1,13 @@
+.warning_text {
+    width: 40vw;
+}
+.content_footer_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.footer {
+    margin-top: 5vw;
+}
+
