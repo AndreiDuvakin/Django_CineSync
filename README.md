@@ -1,4 +1,4 @@
-# CineCync
+# CineSync
 
 Проект представляет собой интерфейс для работы с системой кинотеатра
 
@@ -60,7 +60,7 @@
 6) Запуск:
 
     ```bash
-    cd CineCync
+    cd CineSync
     python3 manage.py runserver
     ```
 
