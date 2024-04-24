@@ -21,7 +21,7 @@ class FilmSessionsManager(Manager):
         current_datetime = timezone.now()
         end_datetime = current_datetime + timedelta(days=5)
         queryset = super().get_queryset()
-        queryset = queryset.select_related('film')
+        queryset = queryset.select_related('film', 'auditorium')
         queryset = queryset.prefetch_related('film__genres', 'film__countries')
         queryset = queryset.filter(
             start_datetime__gte=current_datetime,
@@ -32,7 +32,7 @@ class FilmSessionsManager(Manager):
     def all_timetable(self):
         current_datetime = timezone.now()
         queryset = super().get_queryset()
-        queryset = queryset.select_related('film')
+        queryset = queryset.select_related('film', 'auditorium')
         queryset = queryset.prefetch_related('film__genres', 'film__countries')
         queryset = queryset.filter(start_datetime__gte=current_datetime)
         queryset = queryset.prefetch_related(FilmSession.film.field.name)
