@@ -1,0 +1,19 @@
+stages:
+  - linting
+  - black
+
+flake8:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/flake8:latest
+  script:
+    - pip install -r requirements/test.txt
+    - flake8 .
+  only:
+    - main
+
+black_check:
+  stage: black
+  image: python:3.9
+  script:
+    - pip install -r requirements/dev.txt
+    - black --check --config pyproject.toml .
