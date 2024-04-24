@@ -20,6 +20,9 @@ class AuditoriumAdmin(admin.ModelAdmin):
 @admin.register(FilmSession)
 class FilmSessionAdmin(admin.ModelAdmin):
     list_display = [
-        FilmSession.start_datetime.field.name,
         FilmSession.film.field.name,
+        FilmSession.start_datetime.field.name,
+    ]
+    list_editable = [
+        FilmSession.start_datetime.field.name,
     ]
