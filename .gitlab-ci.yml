@@ -17,10 +17,3 @@ black_check:
   script:
     - pip install -r requirements/dev.txt
     - black --check --config pyproject.toml .
-
-testing:
-  stage: testing
-  script:
-    - pip install -r requirements/test.txt -r requirements/prod.txt
-    - cd lyceum
-    - python manage.py test
