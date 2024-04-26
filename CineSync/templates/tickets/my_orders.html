@@ -9,10 +9,14 @@
 <link href="{% static 'css/tickets/my_orders.css' %}" rel="stylesheet">
 <div class="container">
     <h1 class="header_title">Мои заказы</h1>
+    {% if my_orders %}
     <div class="my_orders_block">
         {% for order in my_orders %}
         {% include "includes/my_order_card.html" %}
         {% endfor %}
     </div>
+    {% else %}
+    <p class="not_found_label">Кажется, вы еще не оформили ни одного заказа 🤔</p>
+    {% endif %}
 </div>
 {% endblock %}

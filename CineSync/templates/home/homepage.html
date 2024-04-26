@@ -8,6 +8,7 @@
 <link href="{% static 'css/home/homepage.css' %}" rel="stylesheet">
 <h1 class="header_title carousel_title">Сейчас в прокате</h1>
 <div id="carouselWhite" class="carousel carousel slide carousel_films" data-bs-ride="carousel">
+    {% if films_preview %}
     <div class="carousel-indicators">
         {% for film in films_preview %}
         <button type="button" data-bs-target="#carouselWhite" data-bs-slide-to="{{ forloop.counter0 }}"
@@ -35,10 +36,14 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+    {% else %}
+    <p class="not_found_label">Информации о фильмах в прокате не найдена :(</p>
+    {% endif %}
 </div>
 <div class="timetable_block">
     <h1 class="header_title">Расписание</h1>
     <div class="container">
+        {% if films_sessions %}
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             {% for date in films_sessions %}
             {% include "includes/date_timetable_button.html" %}
@@ -56,6 +61,9 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <p class="not_found_label">Информации о расписании не найдена :(</p>
+        {% endif %}
     </div>
 </div>
 

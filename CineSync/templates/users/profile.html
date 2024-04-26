@@ -38,6 +38,9 @@
             <div id="help" class="form-text">{{ field.help_text }}</div>
         </div>
         {% endfor %}
+        {% if user.profile.image %}
+        <img class="user_image" src="{{ user.profile.image.url }}">
+        {% endif %}
         {% if messages %}
         {% for message in messages %}
         <p> {{ message }} </p>

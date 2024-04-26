@@ -9,6 +9,7 @@
 <div class="timetable_block">
     <h1 class="header_title">Расписание</h1>
     <div class="container">
+        {% if films_sessions %}
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             {% for date in films_sessions %}
             {% include "includes/date_timetable_button.html" %}
@@ -26,6 +27,9 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <p class="not_found_label">Информации о расписании не найдена :(</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
