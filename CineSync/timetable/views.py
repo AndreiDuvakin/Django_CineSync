@@ -1,5 +1,7 @@
 import datetime
+from collections import defaultdict
 from datetime import date
+from operator import attrgetter
 
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -15,24 +17,17 @@ from timetable.models import FilmSession
 
 def timetable_view(request):
     film_sessions = FilmSession.objects.all_timetable()
+
     sessions_by_date_and_film = {}
 
     for session in film_sessions:
         session_date = session.start_datetime.date()
-        if session_date not in sessions_by_date_and_film:
-            sessions_by_date_and_film[session_date] = {}
+        session_film = session.film
+        sessions_by_date_and_film.setdefault(session_date, {}).setdefault(session_film, []).append(session)
 
-        film_sessions_for_date = sessions_by_date_and_film[session_date]
-        if session.film not in film_sessions_for_date:
-            film_sessions_for_date[session.film] = []
-
-        film_sessions_for_date[session.film].append(session)
-
-    for session_date, session_films in sessions_by_date_and_film.items():
-        for session_film in session_films:
-            sessions_by_date_and_film[session_date][session_film].sort(
-                key=lambda sorted_session: sorted_session.start_datetime,
-            )
+    for session_date in sessions_by_date_and_film:
+        for session_film in sessions_by_date_and_film[session_date]:
+            sessions_by_date_and_film[session_date][session_film].sort(key=lambda x: x.start_datetime)
 
     template = render(
         request,
