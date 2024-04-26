@@ -1,4 +1,4 @@
--r prod.txt
+-r base.txt
 flake8==7.0.0
 flake8-bugbear==24.2.6
 flake8-clean-block==0.1.2

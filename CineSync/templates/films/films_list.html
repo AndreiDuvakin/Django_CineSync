@@ -8,10 +8,11 @@
 <link href="{% static 'css/films/films_list.css' %}" rel="stylesheet">
 <div class="films_block">
     <h1 class="header_title carousel_title">Смотрите в прокате</h1>
+    {% if films %}
     <div class="films_list row row-cols-3">
         {% for film in films %}
         <a class="film_preview_card col" href="{% url 'films:film_details' film_id=film.id %}"
-             style="{% if film.image %}background-image: url('{{ film.image.url }}'){% else %}background-color: #eaeaea{% endif %};">
+           style="{% if film.image %}background-image: url('{{ film.image.url }}'){% else %}background-color: #eaeaea{% endif %};">
             <div class="film_preview_card_text_block">
                 <h3>{{ film.name }}</h3>
                 <p>{{ film.description|truncatewords_html:10 }}</p>
@@ -19,5 +20,8 @@
         </a>
         {% endfor %}
     </div>
+    {% else %}
+    <p class="not_found_label">Информации о фильмах в прокате не найдена :(</p>
+    {% endif %}
 </div>
 {% endblock %}

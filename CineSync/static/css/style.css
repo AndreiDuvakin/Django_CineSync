@@ -96,3 +96,10 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
 }
+.not_found_label {
+    width: 100%;
+    color: #eaeaea;
+    text-align: center;
+    font-size: 2vw;
+    margin-top: 10vw;
+}
