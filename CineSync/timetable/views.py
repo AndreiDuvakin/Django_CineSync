@@ -1,7 +1,5 @@
 import datetime
-from collections import defaultdict
 from datetime import date
-from operator import attrgetter
 
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -23,11 +21,15 @@ def timetable_view(request):
     for session in film_sessions:
         session_date = session.start_datetime.date()
         session_film = session.film
-        sessions_by_date_and_film.setdefault(session_date, {}).setdefault(session_film, []).append(session)
+        sessions_by_date_and_film.setdefault(session_date, {}).setdefault(
+            session_film, []
+        ).append(session)
 
     for session_date in sessions_by_date_and_film:
         for session_film in sessions_by_date_and_film[session_date]:
-            sessions_by_date_and_film[session_date][session_film].sort(key=lambda x: x.start_datetime)
+            sessions_by_date_and_film[session_date][session_film].sort(
+                key=lambda x: x.start_datetime
+            )
 
     template = render(
         request,
