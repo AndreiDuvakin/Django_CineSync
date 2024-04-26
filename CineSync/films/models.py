@@ -80,7 +80,7 @@ class Genre(Model):
 
     class Meta:
         db_table = 'films_genres'
-        verbose_name = 'Жанр'
+        verbose_name = 'жанр'
         verbose_name_plural = 'Жанры'
 
 
@@ -102,7 +102,7 @@ class Director(Model):
 
     class Meta:
         db_table = 'films_directors'
-        verbose_name = 'Режиссер'
+        verbose_name = 'режиссер'
         verbose_name_plural = 'Режиссеры'
 
 
@@ -124,7 +124,7 @@ class Actor(Model):
 
     class Meta:
         db_table = 'films_actors'
-        verbose_name = 'Актер'
+        verbose_name = 'актер'
         verbose_name_plural = 'Актеры'
 
 
@@ -140,7 +140,7 @@ class Country(Model):
 
     class Meta:
         db_table = 'films_countries'
-        verbose_name = 'Страна'
+        verbose_name = 'страна'
         verbose_name_plural = 'Страны'
 
 
@@ -245,5 +245,5 @@ class Film(Model):
 
     class Meta:
         db_table = 'films_films'
-        verbose_name = 'Фильм'
+        verbose_name = 'фильм'
         verbose_name_plural = 'Фильмы'

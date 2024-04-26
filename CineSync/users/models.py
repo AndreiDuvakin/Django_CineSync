@@ -74,6 +74,6 @@ class Profile(Model):
     list_display = ['image_tmb']
 
     class Meta:
-        verbose_name = 'Данные пользователя'
+        verbose_name = 'данные пользователя'
         verbose_name_plural = 'Данные пользователей'
         db_table = 'users_profiles'

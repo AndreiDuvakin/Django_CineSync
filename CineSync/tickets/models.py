@@ -42,7 +42,7 @@ class Order(Model):
 
     class Meta:
         db_table = 'tickets_orders'
-        verbose_name = 'Заказ'
+        verbose_name = 'заказ'
         verbose_name_plural = 'Заказы'
 
 
@@ -72,5 +72,5 @@ class Ticket(Model):
 
     class Meta:
         db_table = 'tickets_tickets'
-        verbose_name = 'Билет'
+        verbose_name = 'билет'
         verbose_name_plural = 'Билеты'

@@ -50,7 +50,7 @@ class Auditorium(Model):
 
     class Meta:
         db_table = 'timetable_auditoriums'
-        verbose_name = 'Зал'
+        verbose_name = 'зал'
         verbose_name_plural = 'Залы'
 
 
@@ -79,7 +79,7 @@ class Row(Model):
 
     class Meta:
         db_table = 'timetable_rows'
-        verbose_name = 'Место'
+        verbose_name = 'место'
         verbose_name_plural = 'Места'
 
 
@@ -134,5 +134,5 @@ class FilmSession(Model):
 
     class Meta:
         db_table = 'timetable_film_sessions'
-        verbose_name = 'Сеанс'
+        verbose_name = 'сеанс'
         verbose_name_plural = 'Сеансы'
