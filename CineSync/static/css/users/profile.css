@@ -21,3 +21,8 @@
 .btn {
     margin: 5px !important;
 }
+.user_image {
+    width: 20vw;
+    border-radius: 2vw;
+    margin-bottom: 1.5vw;
+}

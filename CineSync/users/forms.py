@@ -7,7 +7,9 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     UserCreationForm,
 )
+from django.core.validators import MaxLengthValidator, RegexValidator
 from django.forms import DateInput, ModelForm
+from django.utils.translation import gettext_lazy as _
 
 from users.models import Profile
 
@@ -52,6 +54,15 @@ class SignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         fields = ('username', 'email')
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) > 150:
+            raise forms.ValidationError('Максимальная длина 150 символов.')
+        if not all(char.isalnum() or char in '@/./+/-/_' for char in username):
+            raise forms.ValidationError('Можно использовать только буквы, цифры и символы @/./+/-/_.')
+
+        return username
 
 
 class ProfileForm(ModelForm):
@@ -99,3 +110,12 @@ class UserForm(forms.ModelForm):
             model.first_name.field.name,
             model.last_name.field.name,
         ]
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) > 150:
+            raise forms.ValidationError('Максимальная длина 150 символов.')
+        if not all(char.isalnum() or char in '@/./+/-/_' for char in username):
+            raise forms.ValidationError('Можно использовать только буквы, цифры и символы @/./+/-/_.')
+
+        return username
