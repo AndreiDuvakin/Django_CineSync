@@ -30,7 +30,7 @@
 1) Скачать проект или склонировать репозиторий:
 
     ```bash
-    git clone https://github.com/omixyy/MSU_aerosol_site
+    git clone https://git.numerum.team/andrei/CineSync
     ```
 
 2) Создать виртуальное окружение:
