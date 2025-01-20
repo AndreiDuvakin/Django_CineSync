@@ -9,7 +9,7 @@ services:
       - ./static:/app/static
       - ./media:/app/media
     ports:
-      - "8000:8000"
+      - "5005:8000"
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
