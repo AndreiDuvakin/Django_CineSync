@@ -7,15 +7,19 @@ services:
     command: gunicorn --bind 0.0.0.0:8000 CineSync.wsgi:application
     volumes:
       - .:/app
-      - ./db.sqlite3:/app/db.sqlite3
       - ./static:/app/static
+      - ./media:/app/media
     ports:
-      - "5005:8000"
-    restart: always
+      - "8000:8000"
     environment:
-      - SECRET_KEY=your_secret_key
-      - DJANGO_DEBUG=True
-      - DJANGO_ALLOWED_HOSTS=*
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+      - DJANGO_DB_NAME=${DJANGO_DB_NAME}
+      - DJANGO_DB_USER=${DJANGO_DB_USER}
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
+      - DJANGO_DB_HOST=${DJANGO_DB_HOST}
+      - DJANGO_DB_PORT=${DJANGO_DB_PORT}
     env_file:
       - .env
     deploy:
