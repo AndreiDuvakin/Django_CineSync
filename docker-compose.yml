@@ -2,11 +2,10 @@ version: '3.8'
 
 services:
   web:
-    build: .
+    build: ./CineSync
     container_name: django_app
     command: gunicorn --bind 0.0.0.0:8000 CineSync.wsgi:application
     volumes:
-      - .:/app
       - ./static:/app/static
       - ./media:/app/media
     ports:
